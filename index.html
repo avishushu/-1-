@@ -9109,7 +9109,7 @@ setTimeout(() => {
             if (!existingSwipeHint) {
                 const swipeHint = document.createElement('div');
                 swipeHint.className = 'fc-swipe-hint';
-                swipeHint.innerHTML = '<span style="color:rgba(5,150,105,0.7)">‹‹ ידעתי</span> &nbsp;|&nbsp; <span style="color:rgba(220,38,38,0.7)">לא ידעתי ››</span>';
+                swipeHint.innerHTML = '<span style="color:rgba(5,150,105,0.7)">‹‹ ידעתי</span> &nbsp;|&nbsp; <span style="color:var(--ink);">החלק את הכרטיסיה</span> &nbsp;|&nbsp; <span style="color:rgba(220,38,38,0.7)">לא ידעתי ››</span>';
                 swipeHint.style.cssText = 'text-align:center;font-size:0.72rem;font-weight:700;margin-top:14px;letter-spacing:0.3px;';
                 ansWrap.appendChild(swipeHint);
             }
@@ -9439,7 +9439,7 @@ setTimeout(() => {
             const pct = Math.round((s.done / s.total) * 100);
             document.getElementById('quicktest-progress-bar').style.width = pct + '%';
             document.getElementById('quicktest-progress-text').textContent = `שאלה ${s.done + 1} / ${s.total}`;
-            document.getElementById('quicktest-queue-text').textContent = s.queue.length > 1 ? `${s.queue.length - 1} ממתינות לשוב` : '';
+            document.getElementById('quicktest-queue-text').textContent = s.queue.length > 1 ? `${s.queue.length - 1} ממתינות לתרגול` : '';
 
             const optWrap = document.getElementById('quicktest-options-wrap');
             const feedWrap = document.getElementById('quicktest-feedback-wrap');
