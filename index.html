@@ -2817,7 +2817,7 @@
         <div style="text-align:center; padding:28px 24px 16px; flex-shrink:0;">
             <div style="font-size:2.8rem; margin-bottom:8px;"><span class="icon icon-2xl" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></span></div>
             <h3 style="font-family:'Syne',sans-serif; font-size:1.4rem; font-weight:800; margin-bottom:4px; color:var(--ink);">I'm Here</h3>
-            <p style="font-size:0.85rem; color:var(--muted); margin:0;">מערכת נוכחות חכמה | v1.0.1</p>
+            <p style="font-size:0.85rem; color:var(--muted); margin:0;">מערכת נוכחות חכמה | v1.0.2</p>
             <p style="font-size:0.8rem; color:var(--green); font-weight:700; margin-top:4px;"><span class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 9.9-1"/></svg></span> קוד פתוח (Open Source)</p>
         </div>
 
@@ -2909,14 +2909,14 @@
 
             <!-- MODE SELECTION SCREEN -->
             <div id="quiz-mode-select-screen" style="padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));">
-                <p style="font-size:0.88rem;color:var(--muted);margin-bottom:18px;text-align:center;line-height:1.6;">בחר את סוג התרגול שמתאים לך כרגע:</p>
+                <p style="font-size:0.88rem;color:var(--muted);margin-bottom:18px;text-align:center;line-height:1.6;">איך בא לך לתרגל היום?</p>
                 <div style="display:flex;flex-direction:column;gap:10px;">
                     <button id="btn-mode-flashcard" class="quiz-mode-btn" style="background:linear-gradient(135deg,#f0fdf4,#dcfce7);border:2px solid rgba(5,150,105,0.2);border-radius:var(--r-lg);padding:18px;text-align:right;cursor:pointer;transition:all 0.18s var(--ease-out);box-shadow:var(--shadow-xs);">
                         <div style="display:flex;align-items:center;gap:12px;">
                             <div style="width:44px;height:44px;border-radius:12px;background:rgba(5,150,105,0.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🃏</div>
                             <div style="flex:1;">
-                                <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);margin-bottom:3px;">חזרה מהירה</div>
-                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">כרטיסיות שאלה/תשובה — סמן ידעתי או לא ידעתי</div>
+                                <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);margin-bottom:3px;">תרגול כרטיסיות מהיר</div>
+                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">כרטיסיות שאלה/תשובה עם הסברים — סמן ידעתי או לא ידעתי, שאלות שלא ידעת יעברו להמשך התרגול לחזרה מיידית</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                         </div>
@@ -2925,8 +2925,8 @@
                         <div style="display:flex;align-items:center;gap:12px;">
                             <div style="width:44px;height:44px;border-radius:12px;background:rgba(37,99,235,0.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">⚡</div>
                             <div style="flex:1;">
-                                <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);margin-bottom:3px;">מבחן מהיר</div>
-                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">שאלה אחת עם 4 תשובות, משוב מיידי לאחר כל תשובה</div>
+                                <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);margin-bottom:3px;">תרגול שאלות מהיר</div>
+                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">שאלה אחת עם 4 תשובות - משוב מיידי והסבר לאחר כל תשובה, שאלות שטעית בהם יעברו לסוף התור לחזרה מיידית</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                         </div>
@@ -2936,7 +2936,7 @@
                             <div style="width:44px;height:44px;border-radius:12px;background:rgba(217,119,6,0.15);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">📋</div>
                             <div style="flex:1;">
                                 <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:var(--ink);margin-bottom:3px;">מבחן מסכם</div>
-                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">כל השאלות בבת אחת — הציון נשמר לסטטיסטיקה שלך</div>
+                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">כל השאלות על השיעור בבת אחת — הציון נשמר לסטטיסטיקה שלך</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                         </div>
@@ -2946,7 +2946,7 @@
                             <div style="width:44px;height:44px;border-radius:12px;background:rgba(220,38,38,0.13);display:flex;align-items:center;justify-content:center;font-size:1.4rem;flex-shrink:0;">🧠</div>
                             <div style="flex:1;">
                                 <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:1rem;color:#dc2626;margin-bottom:3px;">תרגול חכם</div>
-                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;">שאלות שטעית בהן, לא ענית עליהן, או לא חזרת עליהן לאחרונה</div>
+                                <div style="font-size:0.8rem;color:var(--muted);line-height:1.5;"> - בסיום המבחן תקבל ציון שייכנס לסטטיסטיקה שלךאלגורית חכם ייבחר במיוחד בשבילך עד 15 שאלות שעוד לא תרגלת, שטעית בהם מספר פעמים או שלא חזרת עליהם לאחרונה</div>
                             </div>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--muted)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
                         </div>
@@ -2954,11 +2954,11 @@
                 </div>
                 <button id="btn-suggest-question" style="width:100%;margin-top:14px;padding:13px;font-size:0.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(135deg,#eff6ff,#dbeafe);border:2px solid rgba(37,99,235,0.25);border-radius:var(--r-md);color:#2563eb;cursor:pointer;transition:all 0.18s;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-                    יש לי שאלה!
+                    יש לי רעיון לשאלה!
                 </button>
                 <button id="btn-mode-select-back" class="outline" style="width:100%;margin-top:10px;padding:13px;font-size:0.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;">
                     <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-                    חזור לרשימת המפגשים
+                    חזור לרשימת תרגול לפי מפגשים
                 </button>
             </div>
 
@@ -3095,7 +3095,7 @@
 
         <!-- STICKY BOTTOM ACTION BAR — Quicktest: המשך -->
         <div id="quicktest-next-bar" class="hidden" style="flex-shrink:0;padding:12px 16px;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--border);box-shadow:0 -4px 16px rgba(13,17,23,0.07);">
-            <button id="btn-quicktest-next" style="width:100%;padding:15px;border-radius:var(--r-md);font-weight:800;font-size:1rem;">המשך ⟩</button>
+            <button id="btn-quicktest-next" style="width:100%;padding:15px;border-radius:var(--r-md);font-weight:800;font-size:1rem;">המשך ›</button>
         </div>
 
         <!-- STICKY BOTTOM ACTION BAR — Smart Practice: הבא -->
@@ -3105,7 +3105,7 @@
 
         <!-- STICKY BOTTOM ACTION BAR — Final Exam: הגש -->
         <div id="finalexam-submit-wrap" style="flex-shrink:0;display:none;padding:12px 16px;padding-bottom:calc(76px + env(safe-area-inset-bottom,0px));background:var(--surface);border-top:1px solid var(--border);box-shadow:0 -4px 16px rgba(13,17,23,0.07);">
-            <button id="btn-finalexam-submit" style="width:100%;padding:16px;font-weight:800;font-size:1rem;">הגש מבחן ⟩</button>
+            <button id="btn-finalexam-submit" style="width:100%;padding:16px;font-weight:800;font-size:1rem;">הגש מבחן »</button>
         </div>
 
     </div><!-- end student-quiz-view -->
