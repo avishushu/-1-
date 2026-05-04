@@ -9800,8 +9800,8 @@ setTimeout(() => {
             }
             // Show temporary swipe hint text (fades out)
             const hint = document.createElement('div');
-            hint.textContent = 'החלק ימינה לשאלה הבאה →';
-            hint.style.cssText = 'text-align:center;font-size:0.75rem;color:rgba(220,38,38,0.55);font-weight:600;margin-top:10px;letter-spacing:0.2px;transition:opacity 1.8s ease;';
+            hint.textContent = '→ → החלק את הכרטיסיה ימינה לשאלה הבאה → →';
+            hint.style.cssText = 'text-align:center;font-size:1rem;color:rgba(220,38,38,0.55);font-weight:600;margin-top:10px;letter-spacing:0.2px;transition:opacity 1.8s ease;';
             feedbackWrap.appendChild(hint);
             requestAnimationFrame(() => requestAnimationFrame(() => {
                 setTimeout(() => { hint.style.opacity = '0'; }, 1400);
