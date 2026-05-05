@@ -10524,8 +10524,8 @@ setTimeout(() => {
                 const smartQs = computeSmartQuestions(allQuestions, allAnswerDocs);
 
                 if (smartQs.length === 0) {
-                    if (badge) badge.textContent = '✓ מעודכן';
-                    await appDialog({ title: '🎉 מעולה!', message: 'אין שאלות שדורשות חזרה כרגע.\nכל השאלות בוצעו לאחרונה ועם שיעור טעויות נמוך.', confirmText: 'סגור' });
+                    if (badge) badge.textContent = '✓ הושלם';
+                    await appDialog({ title: '🎉 מעולה!', message: 'אין שאלות שממתינות לחזרה כרגע.\nכל השאלות בוצעו לאחרונה, ניכר שאתה שולט בחומר, כל הכבוד!', confirmText: 'סגור' });
                     return;
                 }
 
@@ -10536,7 +10536,7 @@ setTimeout(() => {
                 const groupDetails = document.getElementById('student-group-details');
                 groupDetails.classList.add('hidden');
                 view.classList.remove('hidden');
-                document.getElementById('student-quiz-session-title').textContent = `🧠 תרגול חכם — כל השיעורים`;
+                document.getElementById('student-quiz-session-title').textContent = `🧠 תרגול AI מתקדם`;
 
                 // Store all questions + answers in view context
                 view._questions = allQuestions;
@@ -10556,7 +10556,7 @@ setTimeout(() => {
                 document.getElementById('smart-question-card').style.display = '';
                 document.getElementById('btn-quiz-back-to-modes').classList.add('hidden');
                 const sub = document.getElementById('student-quiz-mode-subtitle');
-                if (sub) { sub.textContent = '🧠 תרגול חכם — כל השיעורים'; sub.classList.remove('hidden'); }
+                if (sub) { sub.textContent = '🧠 תרגול AI מתקדם'; sub.classList.remove('hidden'); }
                 const cmBar = document.getElementById('quiz-change-mode-bar');
                 if (cmBar) cmBar.classList.add('hidden');
 
@@ -10583,7 +10583,7 @@ setTimeout(() => {
                 const allAnswerDocs = aSnaps.docs.map(d => ({ id: d.id, ...d.data() }));
                 const smartQs = computeSmartQuestions(allQuestions, allAnswerDocs);
                 if (smartQs.length === 0) {
-                    badge.textContent = '✓ מעודכן';
+                    badge.textContent = '✓ הושלם';
                     badge.style.background = 'rgba(16,185,129,0.28)';
                     badge.style.borderColor = 'rgba(16,185,129,0.5)';
                 } else {
