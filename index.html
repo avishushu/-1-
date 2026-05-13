@@ -14611,7 +14611,7 @@ setTimeout(() => {
                                 if (isSmart && answeredIds.size === 0) return; // empty smart attempt
                                 const base = isSmart ? answeredIds.size : qs.length;
                                 const correct = answers.filter(a => qIds.has(a.questionId) && a.correct).length;
-                                const pct = Math.round((correct / base) * 100);
+                                const pct = Math.min(Math.max(Math.round((correct / base) * 100), 0), 100);
                                 if (!examData[uid]) examData[uid] = { sum: 0, count: 0 };
                                 examData[uid].sum += pct;
                                 examData[uid].count++;
