@@ -1,0 +1,517 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ══════════════════════════════════════════════════════════════
+    // HELPER FUNCTIONS
+    // ══════════════════════════════════════════════════════════════
+
+    function isAuth() {
+      return request.auth != null;
+    }
+
+    // NOTE: myData() costs 1 read per call. Firestore deduplicates
+    // reads within a single request, so multiple calls in one rule
+    // evaluation are fine.
+    function myData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isAuth() && myData().role == 'admin';
+    }
+
+    function isInstructor() {
+      return isAuth() && myData().role == 'instructor';
+    }
+
+    function isStudent() {
+      return isAuth() && myData().role == 'student';
+    }
+
+    function isActiveUser() {
+      return isAuth() && myData().role in ['admin', 'instructor', 'student'];
+    }
+
+    function isGroupInstructor(groupData) {
+      return isAuth() && (
+        groupData.instructorId == request.auth.uid ||
+        (groupData.coInstructors != null &&
+         request.auth.uid in groupData.coInstructors)
+      );
+    }
+
+    function isGroupMember(groupData) {
+      return isAuth() &&
+        groupData.members != null &&
+        request.auth.uid in groupData.members;
+    }
+
+    function groupDoc(gid) {
+      return get(/databases/$(database)/documents/groups/$(gid)).data;
+    }
+
+    function affectedKeys() {
+      return request.resource.data.diff(resource.data).affectedKeys();
+    }
+
+    // ── Session status helpers ────────────────────────────────────
+    // A student may only report attendance on open OR scheduled sessions.
+    // 'scheduled' sessions that have reached their start time are treated
+    // as open client-side; the write must still be accepted server-side.
+    function sessionAllowsAttendance(sessionData) {
+      return sessionData.status == 'open' ||
+             sessionData.status == 'scheduled';
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /users/{uid}
+    // ══════════════════════════════════════════════════════════════
+    match /users/{uid} {
+
+      // Public profile read — role is visible (needed for group helpers)
+      allow read: if true;
+
+      // ── Self-registration on first login ─────────────────────────
+      allow create: if isAuth() &&
+        request.auth.uid == uid &&
+        request.resource.data.keys().hasOnly([
+          'idNumber', 'fullName', 'role', 'createdAt'
+        ]) &&
+        request.resource.data.role    == 'frozen' &&
+        request.resource.data.idNumber is string &&
+        request.resource.data.idNumber.size() >= 8 &&
+        request.resource.data.fullName is string &&
+        request.resource.data.fullName.size() >= 2;
+
+      // ── Admin-created user ────────────────────────────────────────
+      allow create: if isAdmin() &&
+        request.resource.data.keys().hasOnly([
+          'fullName', 'idNumber', 'email', 'role', 'createdAt'
+        ]) &&
+        request.resource.data.fullName is string &&
+        request.resource.data.role in ['frozen', 'student', 'instructor', 'admin'];
+
+      // ── Updates ───────────────────────────────────────────────────
+      allow update: if isAuth() && (
+
+        // Admin may change name, role, email
+        (isAdmin() &&
+         affectedKeys().hasOnly(['fullName', 'role', 'email']) &&
+         (!affectedKeys().hasAny(['role']) ||
+          request.resource.data.role in ['frozen', 'student', 'instructor', 'admin'])) ||
+
+        // User updates their own safe fields only
+        (request.auth.uid == uid &&
+         affectedKeys().hasOnly(['fullName', 'ghostMode', 'lastGroupId']) &&
+         (!affectedKeys().hasAny(['fullName'])    ||
+          request.resource.data.fullName is string) &&
+         (!affectedKeys().hasAny(['ghostMode'])   ||
+          request.resource.data.ghostMode is bool) &&
+         (!affectedKeys().hasAny(['lastGroupId']) ||
+          request.resource.data.lastGroupId is string))
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /groups/{gid}
+    // ══════════════════════════════════════════════════════════════
+    match /groups/{gid} {
+
+      allow read: if isAuth() && (
+        isAdmin() ||
+        isGroupInstructor(resource.data) ||
+        isGroupMember(resource.data)
+      );
+
+      allow create: if isAuth() && (isAdmin() || isInstructor()) &&
+        request.resource.data.name is string &&
+        request.resource.data.name.size() >= 1;
+
+      allow update: if isAuth() && (
+        isAdmin() ||
+        isGroupInstructor(resource.data)
+      );
+
+      allow delete: if isAuth() && (
+        isAdmin() ||
+        isGroupInstructor(resource.data)
+      );
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/sessions/{sid}
+      // ────────────────────────────────────────────────────────────
+      match /sessions/{sid} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          isGroupMember(groupDoc(gid))
+        );
+
+        // Instructor / admin create session (open or scheduled)
+        allow create: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+
+        // ── Updates ───────────────────────────────────────────────
+        allow update: if isAuth() && (
+
+          // Admin: unrestricted
+          isAdmin() ||
+
+          // Instructor: unrestricted on their group's sessions
+          isGroupInstructor(groupDoc(gid)) ||
+
+          // Student: may only write their own attendance/exception entries
+          // on a session that is open or scheduled
+          (
+            isGroupMember(groupDoc(gid)) &&
+            isStudent() &&
+            sessionAllowsAttendance(resource.data) &&
+
+            // Only these three map fields may be touched
+            affectedKeys().hasOnly(['attendance', 'exceptions', 'roundAttendance']) &&
+
+            // Within attendance: only the student's own uid key
+            (!affectedKeys().hasAny(['attendance']) ||
+              request.resource.data.attendance.diff(resource.data.attendance)
+                .affectedKeys().hasOnly([request.auth.uid])
+            ) &&
+
+            // Within exceptions: only the student's own uid key
+            (!affectedKeys().hasAny(['exceptions']) ||
+              request.resource.data.exceptions.diff(resource.data.exceptions)
+                .affectedKeys().hasOnly([request.auth.uid])
+            ) &&
+
+            // Within roundAttendance: only the student's own uid key
+            (!affectedKeys().hasAny(['roundAttendance']) ||
+              request.resource.data.roundAttendance.diff(resource.data.roundAttendance)
+                .affectedKeys().hasOnly([request.auth.uid])
+            )
+          )
+        );
+
+        allow delete: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+      }
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/meta/{metaDoc}
+      // ────────────────────────────────────────────────────────────
+      match /meta/{metaDoc} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+
+        allow write: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+      }
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/notices/{nid}
+      // ────────────────────────────────────────────────────────────
+      match /notices/{nid} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          isGroupMember(groupDoc(gid))
+        );
+
+        allow create, delete: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+
+        // Members may only mark the notice as read (add their uid to readBy)
+        allow update: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          (
+            isGroupMember(groupDoc(gid)) &&
+            affectedKeys().hasOnly(['readBy'])
+          )
+        );
+      }
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/quizQuestions/{qid}
+      // ────────────────────────────────────────────────────────────
+      match /quizQuestions/{qid} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          isGroupMember(groupDoc(gid))
+        );
+
+        allow write: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+      }
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/quizAnswers/{aid}
+      // ────────────────────────────────────────────────────────────
+      match /quizAnswers/{aid} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          isGroupMember(groupDoc(gid))
+        );
+
+        // Student creates answers in their own name only
+        allow create: if isAuth() &&
+          request.auth.uid == request.resource.data.uid &&
+          isGroupMember(groupDoc(gid));
+
+        // Only instructor / admin may delete quiz answers
+        allow delete: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+      }
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/quizReports/{rid}
+      // ────────────────────────────────────────────────────────────
+      match /quizReports/{rid} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          (isGroupMember(groupDoc(gid)) &&
+           resource.data.reporterUid == request.auth.uid)
+        );
+
+        allow create: if isAuth() &&
+          isGroupMember(groupDoc(gid)) &&
+          request.resource.data.reporterUid == request.auth.uid &&
+          request.resource.data.keys().hasOnly([
+            'questionId', 'reason', 'note',
+            'reporterUid', 'reporterName',
+            'resolved', 'createdAt'
+          ]) &&
+          request.resource.data.resolved == false;
+
+        allow update: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+
+        allow delete: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid))
+        );
+      }
+
+      // ────────────────────────────────────────────────────────────
+      // /groups/{gid}/leaderboard/{uid}
+      //
+      // Pre-aggregated stats per user — written by the client on every
+      // exam / practice completion (setDoc merge) and read by all members
+      // when the leaderboard tab is opened.
+      //
+      // Document shape (all fields are optional / created lazily):
+      //   uid, name, lastUpdated
+      //   currentWeeklyStreak, lastPracticeWeek
+      //   allTime.{examSum, examCount, practiceCount}
+      //   monthly_YYYY_MM.{examSum, examCount, practiceCount}
+      //   weekly_YYYY_Wxx.{examSum, examCount, practiceCount}
+      //   lastPosition_week, lastPosition_month, lastPosition_all
+      //
+      // Write restrictions:
+      //   - A student may only write to the document whose id equals
+      //     their own auth uid (enforced by `uid == request.auth.uid`).
+      //   - Instructors and admins have unrestricted write access
+      //     (needed for future admin tools / migration scripts).
+      // ────────────────────────────────────────────────────────────
+      match /leaderboard/{uid} {
+
+        allow read: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          isGroupMember(groupDoc(gid))
+        );
+
+        allow write: if isAuth() && (
+          isAdmin() ||
+          isGroupInstructor(groupDoc(gid)) ||
+          (isGroupMember(groupDoc(gid)) && request.auth.uid == uid)
+        );
+      }
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /questionSuggestions/{sid}
+    // ══════════════════════════════════════════════════════════════
+    match /questionSuggestions/{sid} {
+
+      allow read: if isAuth() && (
+        isAdmin() ||
+        isInstructor() ||
+        resource.data.submittedBy == request.auth.uid
+      );
+
+      allow create: if isActiveUser() &&
+        request.resource.data.submittedBy == request.auth.uid &&
+        request.resource.data.keys().hasOnly([
+          'gid', 'sessionNum',
+          'question', 'correct', 'wrong', 'explanation',
+          'submittedBy', 'submittedByName',
+          'status', 'createdAt'
+        ]) &&
+        request.resource.data.status   == 'pending' &&
+        request.resource.data.question is string &&
+        request.resource.data.question.size() >= 3 &&
+        request.resource.data.correct  is string &&
+        request.resource.data.gid      is string;
+
+      allow update: if isAuth() && (
+        isAdmin() ||
+        isInstructor()
+      );
+
+      allow delete: if isAuth() && (
+        isAdmin() ||
+        isInstructor() ||
+        resource.data.submittedBy == request.auth.uid
+      );
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /userMessages/{msgId}
+    // ══════════════════════════════════════════════════════════════
+    match /userMessages/{msgId} {
+
+      allow read: if isAuth() && (
+        isAdmin() ||
+        resource.data.fromUid == request.auth.uid ||
+        resource.data.toUid   == request.auth.uid
+      );
+
+      allow create: if isAuth() &&
+        request.resource.data.fromUid == request.auth.uid &&
+        request.resource.data.toUid   is string &&
+        request.resource.data.text    is string &&
+        request.resource.data.text.size() >= 1 &&
+        request.resource.data.keys().hasOnly([
+          'fromUid', 'fromName', 'fromRole',
+          'toUid', 'toName',
+          'text', 'createdAt', 'readByRecipient', 'confirmedByUser'
+        ]);
+
+      allow update: if isAuth() && (
+        // Admin: management fields
+        (isAdmin() &&
+         affectedKeys().hasOnly([
+           'readByRecipient', 'reply', 'repliedAt',
+           'adminNote', 'confirmedByUser'
+         ])) ||
+        // Recipient: mark read + reply
+        (resource.data.toUid == request.auth.uid &&
+         affectedKeys().hasOnly(['readByRecipient', 'reply', 'repliedAt'])) ||
+        // Sender: confirm receipt only
+        (resource.data.fromUid == request.auth.uid &&
+         affectedKeys().hasOnly(['confirmedByUser']))
+      );
+
+      // Messages are never deleted (audit trail)
+      allow delete: if false;
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /systemBroadcasts/{bcId}
+    // ══════════════════════════════════════════════════════════════
+    match /systemBroadcasts/{bcId} {
+
+      allow read: if isAuth();
+
+      allow create: if isAdmin();
+
+      // Any authenticated user may add their uid to confirmedBy
+      allow update: if isAuth() && (
+        isAdmin() ||
+        (affectedKeys().hasOnly(['confirmedBy']) &&
+         request.resource.data.confirmedBy
+           .diff(resource.data.confirmedBy)
+           .affectedKeys().hasOnly([request.auth.uid]))
+      );
+
+      allow delete: if isAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /systemSettings/{docId}
+    // ══════════════════════════════════════════════════════════════
+    match /systemSettings/{docId} {
+      // Login message is read publicly (shown before auth)
+      allow read: if true;
+      allow create, update, delete: if isAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /passwordResetRequests/{reqId}
+    // ══════════════════════════════════════════════════════════════
+    match /passwordResetRequests/{reqId} {
+
+      allow read: if isAdmin();
+
+      // Anonymous creation allowed (user may not be logged in yet)
+      allow create: if
+        request.resource.data.fullName is string &&
+        request.resource.data.fullName.size() >= 2 &&
+        request.resource.data.idNumber is string &&
+        request.resource.data.idNumber.size() >= 8 &&
+        request.resource.data.phone is string &&
+        request.resource.data.phone.size() >= 7 &&
+        request.resource.data.reason is string &&
+        request.resource.data.reason.size() >= 2 &&
+        request.resource.data.status == 'pending' &&
+        request.resource.data.keys().hasOnly([
+          'fullName', 'idNumber', 'phone', 'reason',
+          'status', 'createdAt'
+        ]);
+
+      allow update, delete: if isAdmin();
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // /systemLog/{logId}
+    // ══════════════════════════════════════════════════════════════
+    match /systemLog/{logId} {
+
+      allow read: if isAdmin();
+
+      allow create: if isActiveUser() &&
+        request.resource.data.keys().hasOnly([
+          'action', 'details', 'actorUid', 'actorName', 'createdAt'
+        ]) &&
+        request.resource.data.actorUid == request.auth.uid;
+
+      // Logs are immutable
+      allow update, delete: if false;
+    }
+
+    // ══════════════════════════════════════════════════════════════
+    // Catch-all: deny everything not explicitly matched above
+    // ══════════════════════════════════════════════════════════════
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
