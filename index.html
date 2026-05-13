@@ -14979,7 +14979,7 @@ setTimeout(() => {
                                 if (isSm && done.size === 0) return;
                                 const base = isSm ? done.size : qs.length;
                                 const correct = ans.filter(a => qIds.has(a.questionId) && a.correct).length;
-                                const pct = Math.round((correct / base) * 100);
+                                const pct = Math.min(Math.max(Math.round((correct / base) * 100), 0), 100);
                                 if (!scoreMap[uid]) scoreMap[uid] = { sum: 0, count: 0 };
                                 scoreMap[uid].sum += pct;
                                 scoreMap[uid].count++;
