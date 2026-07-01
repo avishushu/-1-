@@ -7,19 +7,25 @@
       "src": "Micon.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "micon2.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "maskable"
+      "purpose": "any maskable"
+    },
+    {
+      "src": "micon4.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "any maskable"
     }
   ],
   "start_url": "./index.html",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#607D8B",
+  "background_color": "#f8fafc",
   "theme_color": "#d32f2f",
   "scope": "./",
   "lang": "he",
