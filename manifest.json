@@ -7,19 +7,19 @@
       "src": "Micon.png",
       "type": "image/png",
       "sizes": "192x192",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "micon2.png",
       "type": "image/png",
       "sizes": "512x512",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     },
     {
       "src": "micon4.png",
       "type": "image/png",
       "sizes": "1024x1024",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ],
   "start_url": "./index.html",
