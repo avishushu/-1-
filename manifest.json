@@ -4,7 +4,7 @@
   "description": "אפליקציה לניהול ודיווח נוכחות מבוססת מיקום",
   "icons": [
     {
-      "src": "Micon.png",
+      "src": "micon.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "any maskable"
