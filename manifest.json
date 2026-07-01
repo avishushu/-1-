@@ -14,6 +14,12 @@
       "type": "image/png",
       "sizes": "512x512",
       "purpose": "maskable"
+    },    
+    {
+      "src": "micon2.png",
+      "type": "image/png",
+      "sizes": "1024x1024",
+      "purpose": "maskable"
     }
   ],
   "start_url": "./index.html",
