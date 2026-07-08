@@ -1,4 +1,4 @@
-const VERSION = 'v1.0.1'; // עדכן ידנית בכל דיפלוי משמעותי
+const VERSION = 'v1.0.2'; // עדכן ידנית בכל דיפלוי משמעותי
 
 self.addEventListener('install', (event) => {
     self.skipWaiting();
