@@ -26,7 +26,7 @@
   "display": "standalone",
   "orientation": "portrait",
   "background_color": "#030f26",
-  "theme_color": "#d32f2f",
+  "theme_color": "#030f26",
   "scope": "./",
   "lang": "he",
   "dir": "rtl"
