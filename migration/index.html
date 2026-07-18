@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מיגרציית תרגולים — Im Here</title>
+<style>
+    * { box-sizing: border-box; }
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+        background: #0d1117;
+        color: #e6edf3;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.5;
+    }
+    .wrap { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 1.4rem; margin-bottom: 4px; }
+    .subtitle { color: #8b949e; font-size: 0.85rem; margin-bottom: 24px; }
+    .card {
+        background: #161b22; border: 1px solid #30363d; border-radius: 10px;
+        padding: 18px; margin-bottom: 16px;
+    }
+    .card h2 { font-size: 1rem; margin: 0 0 10px; }
+    label { display: block; font-size: 0.85rem; margin-bottom: 6px; color: #c9d1d9; }
+    input[type="email"], input[type="password"] {
+        width: 100%; padding: 10px 12px; border-radius: 6px; border: 1px solid #30363d;
+        background: #0d1117; color: #e6edf3; font-size: 0.9rem; margin-bottom: 12px;
+    }
+    button {
+        background: #238636; color: white; border: none; border-radius: 6px;
+        padding: 10px 18px; font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    }
+    button:hover { background: #2ea043; }
+    button:disabled { background: #30363d; color: #8b949e; cursor: not-allowed; }
+    button.secondary { background: #21262d; border: 1px solid #30363d; }
+    button.secondary:hover { background: #30363d; }
+    button.danger { background: #da3633; }
+    button.danger:hover { background: #f85149; }
+    .toggle-row { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+    .toggle-row input[type="checkbox"] { width: 18px; height: 18px; }
+    .warn-box {
+        background: rgba(210,153,34,0.1); border: 1px solid rgba(210,153,34,0.4);
+        border-radius: 6px; padding: 12px 14px; font-size: 0.85rem; margin-bottom: 14px;
+        color: #d29922;
+    }
+    .danger-box {
+        background: rgba(248,81,73,0.1); border: 1px solid rgba(248,81,73,0.4);
+        border-radius: 6px; padding: 12px 14px; font-size: 0.85rem; margin-bottom: 14px;
+        color: #f85149;
+    }
+    #log {
+        background: #010409; border: 1px solid #30363d; border-radius: 6px;
+        padding: 12px; font-family: 'SF Mono', Consolas, monospace; font-size: 0.78rem;
+        height: 420px; overflow-y: auto; white-space: pre-wrap; direction: ltr; text-align: left;
+    }
+    .log-line { padding: 1px 0; }
+    .log-info { color: #8b949e; }
+    .log-ok { color: #3fb950; }
+    .log-skip { color: #d29922; }
+    .log-err { color: #f85149; }
+    .log-section { color: #58a6ff; font-weight: 700; margin-top: 6px; }
+    #summary { font-size: 0.9rem; margin-top: 12px; }
+    #summary b { color: #3fb950; }
+    .hidden { display: none !important; }
+    .btn-row { display: flex; gap: 10px; flex-wrap: wrap; }
+</style>
+</head>
+<body>
+<div class="wrap">
+    <h1>🔧 מיגרציית תרגולים — פורמט ישן ל-studentQuizStats</h1>
+    <div class="subtitle">כלי מנהל חד-פעמי. קורא בלבד מ-quizAnswers הישן, לא נוגע/מוחק שם דבר.</div>
+
+    <div id="login-card" class="card">
+        <h2>התחברות מנהל</h2>
+        <label>אימייל</label>
+        <input type="email" id="login-email" autocomplete="username">
+        <label>סיסמה</label>
+        <input type="password" id="login-password" autocomplete="current-password">
+        <button id="btn-login">התחבר</button>
+        <div id="login-error" class="danger-box hidden" style="margin-top:12px;"></div>
+    </div>
+
+    <div id="migration-card" class="card hidden">
+        <h2>הרשאה אושרה ✓</h2>
+        <div class="warn-box">
+            <b>איך זה עובד:</b> הכלי קורא את כל התרגולים הישנים מ-<code>quizAnswers</code> בכל קבוצה,
+            משחזר מהם את הסטטיסטיקה המצטברת החדשה, ו<b>כותב רק לתלמידים שעדיין אין להם</b>
+            <code>studentQuizStats</code> — כדי לא לדרוס פעילות אמיתית שכבר קרתה במערכת החדשה.
+            שום דבר לא נמחק. ניתן להריץ שוב בבטחה.
+        </div>
+        <div class="toggle-row">
+            <input type="checkbox" id="dry-run-toggle" checked>
+            <label for="dry-run-toggle" style="margin:0;">מצב בדיקה (Dry Run) — לא כותב כלום, רק מציג מה ייכתב</label>
+        </div>
+        <div class="btn-row">
+            <button id="btn-start">🔍 הרץ בדיקה</button>
+            <button id="btn-commit" class="danger hidden">✅ בצע כתיבה בפועל</button>
+            <button id="btn-logout" class="secondary">התנתק</button>
+        </div>
+        <div id="summary"></div>
+    </div>
+
+    <div id="log-card" class="card hidden">
+        <h2>לוג</h2>
+        <div id="log"></div>
+    </div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+import { initializeFirestore, doc, getDoc, collection, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyADVI0SVjJLWedUmfbqBYtlgw1BslfXtMY",
+    authDomain: "attendancemda.firebaseapp.com",
+    projectId: "attendancemda",
+    storageBucket: "attendancemda.firebasestorage.app",
+    messagingSenderId: "303165146059",
+    appId: "1:303165146059:web:cf698f5837c0ee96702c4e"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = initializeFirestore(app, { experimentalAutoDetectLongPolling: true });
+
+const logEl = document.getElementById('log');
+const logCard = document.getElementById('log-card');
+function log(msg, cls = 'info') {
+    logCard.classList.remove('hidden');
+    const line = document.createElement('div');
+    line.className = 'log-line log-' + cls;
+    line.textContent = msg;
+    logEl.appendChild(line);
+    logEl.scrollTop = logEl.scrollHeight;
+}
+function logSection(msg) { log('\n' + msg, 'section'); }
+
+// ── Auth ──────────────────────────────────────────────────────
+document.getElementById('btn-login').addEventListener('click', async () => {
+    const email = document.getElementById('login-email').value.trim();
+    const password = document.getElementById('login-password').value;
+    const errEl = document.getElementById('login-error');
+    errEl.classList.add('hidden');
+    if (!email || !password) return;
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+    } catch (err) {
+        errEl.textContent = 'שגיאת התחברות: ' + (err.code || err.message);
+        errEl.classList.remove('hidden');
+    }
+});
+
+document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
+
+let _lastDryRunResults = null; // cached plan from the last dry-run, used by "commit" button
+
+onAuthStateChanged(auth, async (user) => {
+    const loginCard = document.getElementById('login-card');
+    const migrationCard = document.getElementById('migration-card');
+    if (!user) {
+        loginCard.classList.remove('hidden');
+        migrationCard.classList.add('hidden');
+        return;
+    }
+    try {
+        const uDoc = await getDoc(doc(db, 'users', user.uid));
+        const role = uDoc.exists() ? uDoc.data().role : null;
+        if (role !== 'admin') {
+            await signOut(auth);
+            document.getElementById('login-error').textContent = 'רק למנהלי מערכת יש גישה לכלי זה.';
+            document.getElementById('login-error').classList.remove('hidden');
+            return;
+        }
+        loginCard.classList.add('hidden');
+        migrationCard.classList.remove('hidden');
+    } catch (err) {
+        console.error(err);
+        document.getElementById('login-error').textContent = 'שגיאה באימות הרשאות: ' + err.message;
+        document.getElementById('login-error').classList.remove('hidden');
+    }
+});
+
+// =====================================================
+// RECONSTRUCTION LOGIC
+// Mirrors exactly what the OLD write sites produced, and what the NEW
+// recordQuizRound()/recordPracticeSession() functions expect to read.
+// =====================================================
+
+/** Converts a Firestore Timestamp (or null) to milliseconds. Old docs used
+ *  serverTimestamp(); some very old/edge docs might lack it entirely. */
+function _tsToMs(ts) {
+    if (!ts) return 0;
+    if (typeof ts.toMillis === 'function') return ts.toMillis();
+    if (typeof ts.seconds === 'number') return ts.seconds * 1000;
+    return 0;
+}
+
+/**
+ * Reconstructs one student's aggregated studentQuizStats shape from their
+ * raw quizAnswers documents in a single group.
+ *
+ * docs: array of {id, ...data()} for ALL quizAnswers docs where uid===this student,
+ *       already fetched for the whole group.
+ */
+function reconstructStudentStats(docs) {
+    const questions = {};
+    const bySession = {};
+    const practiceRuns = {};
+
+    // ── 1. questions map — from every doc that has a questionId (smart + exam) ──
+    const byQuestion = {};
+    docs.forEach(d => {
+        if (!d.questionId) return;
+        if (!byQuestion[d.questionId]) byQuestion[d.questionId] = [];
+        byQuestion[d.questionId].push(d);
+    });
+    Object.entries(byQuestion).forEach(([qid, list]) => {
+        let correctCount = 0, wrongCount = 0, latest = null, latestMs = -1;
+        list.forEach(d => {
+            if (d.correct === true) correctCount++;
+            else if (d.correct === false) wrongCount++;
+            const ms = _tsToMs(d.answeredAt);
+            if (ms >= latestMs) { latestMs = ms; latest = d; }
+        });
+        questions[qid] = {
+            correctCount, wrongCount,
+            lastAnsweredAt: latestMs > 0 ? latestMs : Date.now(),
+            lastCorrect: latest ? !!latest.correct : false,
+            lastChosen: latest ? (latest.chosen || '') : '',
+        };
+    });
+
+    function touchSession(scope, score, correct, total, ms) {
+        if (!bySession[scope]) {
+            bySession[scope] = { attemptCount: 0, scoreSum: 0, correctSum: 0, totalSum: 0, bestScore: 0, lastScore: 0, lastMode: '', lastAttemptAt: 0 };
+        }
+        const b = bySession[scope];
+        b.attemptCount += 1;
+        b.scoreSum += score;
+        b.correctSum += correct;
+        b.totalSum += total;
+        b.bestScore = Math.max(b.bestScore, score);
+        if (ms >= b.lastAttemptAt) { b.lastScore = score; b.lastAttemptAt = ms; }
+    }
+
+    // ── 2. bySession from smartExamScore summary docs (score already known) ──
+    docs.filter(d => d.mode === 'smartExamScore').forEach(d => {
+        let scope;
+        if (d.isMaster) {
+            scope = 'master';
+        } else {
+            // Infer the session from per-question docs sharing this attemptId.
+            const related = docs.filter(x => x.attemptId === d.attemptId && x.questionId != null);
+            const sessionNums = [...new Set(related.map(x => x.sessionNum))];
+            scope = sessionNums.length === 1 ? sessionNums[0] : 'master';
+        }
+        const total = d.total || 0;
+        const correct = d.correct || 0;
+        const score = typeof d.score === 'number' ? d.score : (total > 0 ? Math.round((correct / total) * 100) : 0);
+        touchSession(scope, score, correct, total, _tsToMs(d.answeredAt));
+        bySession[scope].lastMode = 'smart';
+    });
+
+    // ── 3. bySession from final-exam per-question docs — NO summary doc existed
+    //    for exams in the old schema, so reconstruct by grouping on attemptId. ──
+    const examGroups = {};
+    docs.forEach(d => {
+        if (!d.questionId || !d.attemptId || !d.attemptId.endsWith('_exam')) return;
+        if (!examGroups[d.attemptId]) examGroups[d.attemptId] = [];
+        examGroups[d.attemptId].push(d);
+    });
+    Object.values(examGroups).forEach(group => {
+        const sessionNums = [...new Set(group.map(d => d.sessionNum))];
+        const scope = sessionNums.length === 1 ? sessionNums[0] : 'master';
+        const correct = group.filter(d => d.correct === true).length;
+        const total = group.length;
+        const score = total > 0 ? Math.round((correct / total) * 100) : 0;
+        const ms = Math.max(...group.map(d => _tsToMs(d.answeredAt)));
+        touchSession(scope, score, correct, total, ms);
+        bySession[scope].lastMode = 'finalexam';
+    });
+
+    // ── 4. practiceRuns — ONLY flashcard/quicktest (casual, no per-question score).
+    //    Smart/exam rounds already give direct per-question coverage above, so they
+    //    intentionally do NOT also touch practiceRuns — matches the new system's design. ──
+    docs.forEach(d => {
+        if ((d.mode === 'flashcard' || d.mode === 'quicktest') && d.practiceOnly && d.sessionNum != null) {
+            const sNum = d.sessionNum;
+            if (!practiceRuns[sNum]) practiceRuns[sNum] = { count: 0, lastPracticedAt: 0 };
+            practiceRuns[sNum].count += 1;
+            practiceRuns[sNum].lastPracticedAt = Math.max(practiceRuns[sNum].lastPracticedAt, _tsToMs(d.answeredAt));
+        }
+    });
+
+    return { questions, bySession, practiceRuns };
+}
+
+// =====================================================
+// MAIN MIGRATION ORCHESTRATOR
+// =====================================================
+
+async function runMigration(dryRun) {
+    const btnStart = document.getElementById('btn-start');
+    const btnCommit = document.getElementById('btn-commit');
+    btnStart.disabled = true;
+    btnCommit.disabled = true;
+    logEl.innerHTML = '';
+    document.getElementById('summary').innerHTML = '';
+
+    log(dryRun ? '🔍 מתחיל בדיקה (Dry Run) — לא ייכתב דבר בפועל...' : '✅ מתחיל כתיבה בפועל...', 'section');
+
+    const plan = []; // { gid, gname, uid, data } — accumulated for commit mode
+    let totalGroups = 0, totalStudentsFound = 0, totalSkippedExisting = 0, totalToMigrate = 0, totalErrors = 0;
+
+    try {
+        const groupsSnap = await getDocs(collection(db, 'groups'));
+        totalGroups = groupsSnap.size;
+        log(`נמצאו ${totalGroups} קבוצות.`, 'info');
+
+        for (const gDoc of groupsSnap.docs) {
+            const gid = gDoc.id;
+            const gname = gDoc.data().name || gid;
+            logSection(`── קבוצה: ${gname} (${gid}) ──`);
+
+            let answersSnap;
+            try {
+                answersSnap = await getDocs(collection(db, 'groups', gid, 'quizAnswers'));
+            } catch (err) {
+                log(`  ✗ שגיאה בקריאת quizAnswers: ${err.message}`, 'err');
+                totalErrors++;
+                continue;
+            }
+
+            if (answersSnap.empty) {
+                log('  (אין תרגולים ישנים בקבוצה זו — מדלג)', 'info');
+                continue;
+            }
+
+            // Group raw docs by uid
+            const byUid = {};
+            answersSnap.forEach(d => {
+                const data = d.data();
+                if (!data.uid) return;
+                if (!byUid[data.uid]) byUid[data.uid] = [];
+                byUid[data.uid].push({ id: d.id, ...data });
+            });
+
+            const uids = Object.keys(byUid);
+            totalStudentsFound += uids.length;
+            log(`  ${answersSnap.size} מסמכי תרגול ישנים, ${uids.length} תלמידים.`, 'info');
+
+            for (const uid of uids) {
+                try {
+                    // Safety check: skip if this student already has aggregated stats
+                    // (either from prior migration run, or real activity on the new system).
+                    const existing = await getDoc(doc(db, 'groups', gid, 'studentQuizStats', uid));
+                    if (existing.exists()) {
+                        log(`  ⏭ ${uid} — כבר קיים ב-studentQuizStats, מדלג (בטוח: לא דורס)`, 'skip');
+                        totalSkippedExisting++;
+                        continue;
+                    }
+
+                    const reconstructed = reconstructStudentStats(byUid[uid]);
+                    const qCount = Object.keys(reconstructed.questions).length;
+                    const sessCount = Object.keys(reconstructed.bySession).length;
+                    const pCount = Object.keys(reconstructed.practiceRuns).length;
+
+                    log(`  ✓ ${uid} — ישוחזרו: ${qCount} שאלות, ${sessCount} מפגשים מדורגים, ${pCount} מפגשים בתרגול חופשי`, 'ok');
+                    totalToMigrate++;
+                    plan.push({ gid, gname, uid, data: reconstructed });
+
+                } catch (err) {
+                    log(`  ✗ שגיאה בעיבוד תלמיד ${uid}: ${err.message}`, 'err');
+                    totalErrors++;
+                }
+            }
+        }
+
+        logSection('── סיכום ──');
+        log(`קבוצות: ${totalGroups}`, 'info');
+        log(`תלמידים עם נתונים ישנים: ${totalStudentsFound}`, 'info');
+        log(`דולגו (כבר קיימים): ${totalSkippedExisting}`, 'skip');
+        log(`מוכנים למיגרציה: ${totalToMigrate}`, 'ok');
+        if (totalErrors > 0) log(`שגיאות: ${totalErrors}`, 'err');
+
+        document.getElementById('summary').innerHTML =
+            `<b>${totalToMigrate}</b> תלמידים מוכנים למיגרציה מתוך ${totalStudentsFound} שנמצאו ` +
+            `(${totalSkippedExisting} דולגו כי כבר קיימים).`;
+
+        if (dryRun) {
+            _lastDryRunResults = plan;
+            if (totalToMigrate > 0) {
+                document.getElementById('btn-commit').classList.remove('hidden');
+                log('\n👉 בדיקה הושלמה. לחץ "בצע כתיבה בפועל" כדי לכתוב את הנתונים לעיל.', 'section');
+            } else {
+                log('\nאין מה למגר — כל התלמידים כבר מסונכרנים.', 'section');
+            }
+        } else {
+            await commitPlan(plan);
+        }
+
+    } catch (err) {
+        log(`✗ שגיאה כללית: ${err.message}`, 'err');
+        console.error(err);
+    } finally {
+        btnStart.disabled = false;
+        if (_lastDryRunResults && _lastDryRunResults.length > 0) btnCommit.disabled = false;
+    }
+}
+
+/** Writes the migration plan to Firestore in batches of 400 (safety margin under
+ *  Firestore's 500-operation batch limit). Uses batch.set since these are brand-new
+ *  documents (existence was already verified during the scan). */
+async function commitPlan(plan) {
+    if (!plan || plan.length === 0) { log('אין מה לכתוב.', 'info'); return; }
+    logSection(`── כותב ${plan.length} מסמכים ל-Firestore ──`);
+
+    const CHUNK = 400;
+    let written = 0, failed = 0;
+
+    for (let i = 0; i < plan.length; i += CHUNK) {
+        const chunk = plan.slice(i, i + CHUNK);
+        const batch = writeBatch(db);
+        chunk.forEach(item => {
+            const ref = doc(db, 'groups', item.gid, 'studentQuizStats', item.uid);
+            batch.set(ref, {
+                uid: item.uid,
+                groupId: item.gid,
+                questions: item.data.questions,
+                bySession: item.data.bySession,
+                practiceRuns: item.data.practiceRuns,
+                _migratedAt: Date.now(),
+            });
+        });
+        try {
+            await batch.commit();
+            written += chunk.length;
+            log(`  ✓ נכתבו ${written}/${plan.length}...`, 'ok');
+        } catch (err) {
+            failed += chunk.length;
+            log(`  ✗ שגיאה בכתיבת batch (${chunk.length} רשומות): ${err.message}`, 'err');
+        }
+    }
+
+    logSection('── סיום ──');
+    log(`נכתבו בהצלחה: ${written}`, 'ok');
+    if (failed > 0) log(`נכשלו: ${failed}`, 'err');
+    document.getElementById('summary').innerHTML = `<b>הושלם.</b> ${written} תלמידים עודכנו בהצלחה.` + (failed > 0 ? ` ${failed} נכשלו.` : '');
+    document.getElementById('btn-commit').classList.add('hidden');
+    _lastDryRunResults = null;
+}
+
+document.getElementById('btn-start').addEventListener('click', () => {
+    const dryRun = document.getElementById('dry-run-toggle').checked;
+    runMigration(dryRun);
+});
+
+document.getElementById('btn-commit').addEventListener('click', async () => {
+    if (!_lastDryRunResults || _lastDryRunResults.length === 0) return;
+    const confirmed = window.confirm(
+        `לכתוב ${_lastDryRunResults.length} מסמכי studentQuizStats חדשים ל-Firestore?\n` +
+        `פעולה זו בלתי הפיכה (אם כי לא מוחקת נתונים ישנים).`
+    );
+    if (!confirmed) return;
+    document.getElementById('btn-commit').disabled = true;
+    document.getElementById('btn-start').disabled = true;
+    await commitPlan(_lastDryRunResults);
+    document.getElementById('btn-start').disabled = false;
+});
+</script>
+</body>
+</html>
