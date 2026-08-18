@@ -2,9 +2,9 @@
   "users": {
     "demo-student-1": {
       "__doc": {
-        "fullName": "דנה כהן",
+        "fullName": "אבי קדוש",
         "role": "student",
-        "idNumber": "000000001",
+        "idNumber": "123456789",
         "activeGroupId": "demo-group-1"
       }
     },
@@ -58,7 +58,7 @@
     },
     "demo-instructor-1": {
       "__doc": {
-        "fullName": "מדריך דמו",
+        "fullName": "מדריך דוגמה",
         "role": "instructor"
       }
     }
@@ -90,7 +90,7 @@
             },
             "attendance": {
               "demo-student-1": {
-                "status": "on_time",
+                "status": "late",
                 "timestamp": {
                   "__ts": "2026-06-02T09:00:00Z"
                 }
@@ -108,7 +108,7 @@
                 }
               },
               "demo-student-4": {
-                "status": "on_time",
+                "status": "late",
                 "timestamp": {
                   "__ts": "2026-06-02T09:00:00Z"
                 }
@@ -733,7 +733,7 @@
         "demo-student-1": {
           "__doc": {
             "uid": "demo-student-1",
-            "name": "דנה כהן",
+            "name": "אבי קדוש",
             "lastUpdated": {
               "__ts": "2026-08-18T09:00:00Z"
             },
