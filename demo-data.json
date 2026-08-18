@@ -1,0 +1,59 @@
+{
+  "users": {
+    "demo-student-1": {
+      "__doc": {
+        "fullName": "דנה כהן",
+        "role": "student",
+        "idNumber": "000000001",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-2": {
+      "__doc": { "fullName": "יוסי לוי", "role": "student", "idNumber": "000000002", "activeGroupId": "demo-group-1" }
+    },
+    "demo-student-3": {
+      "__doc": { "fullName": "מאיה אברהם", "role": "student", "idNumber": "000000003", "activeGroupId": "demo-group-1" }
+    },
+    "demo-instructor-1": {
+      "__doc": { "fullName": "מדריך דמו", "role": "instructor" }
+    }
+  },
+  "groups": {
+    "demo-group-1": {
+      "__doc": {
+        "name": "כיתה לדוגמה",
+        "members": ["demo-student-1", "demo-student-2", "demo-student-3"],
+        "instructorUid": "demo-instructor-1",
+        "coInstructors": [],
+        "sessionNumber": 3
+      },
+      "sessions": {
+        "demo-session-1": {
+          "__doc": {
+            "status": "open",
+            "sessionNumber": 3,
+            "createdAt": { "__ts": "2026-08-18T09:00:00Z" }
+          }
+        },
+        "demo-session-0": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 2,
+            "createdAt": { "__ts": "2026-08-11T09:00:00Z" }
+          }
+        }
+      },
+      "leaderboard": {
+        "demo-student-1": { "__doc": { "fullName": "דנה כהן", "score": 87 } },
+        "demo-student-2": { "__doc": { "fullName": "יוסי לוי", "score": 74 } },
+        "demo-student-3": { "__doc": { "fullName": "מאיה אברהם", "score": 91 } }
+      },
+      "quizQuestions": {
+        "demo-q1": { "__doc": { "sessionNum": 1, "question": "מהו הצעד הראשון בבדיקת נפגע?", "createdAt": { "__ts": "2026-06-01T08:00:00Z" } } }
+      },
+      "notices": {},
+      "quizAnswers": {},
+      "quizReports": {}
+    }
+  }
+}
