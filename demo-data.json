@@ -1,0 +1,2066 @@
+{
+  "users": {
+    "demo-student-1": {
+      "__doc": {
+        "fullName": "דנה כהן",
+        "role": "student",
+        "idNumber": "000000001",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-2": {
+      "__doc": {
+        "fullName": "יוסי לוי",
+        "role": "student",
+        "idNumber": "000000002",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-3": {
+      "__doc": {
+        "fullName": "מאיה אברהם",
+        "role": "student",
+        "idNumber": "000000003",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-4": {
+      "__doc": {
+        "fullName": "עומר פרץ",
+        "role": "student",
+        "idNumber": "000000004",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-5": {
+      "__doc": {
+        "fullName": "שירה מזרחי",
+        "role": "student",
+        "idNumber": "000000005",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-6": {
+      "__doc": {
+        "fullName": "אלון גבאי",
+        "role": "student",
+        "idNumber": "000000006",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-7": {
+      "__doc": {
+        "fullName": "נועה שרעבי",
+        "role": "student",
+        "idNumber": "000000007",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-instructor-1": {
+      "__doc": {
+        "fullName": "מדריך דמו",
+        "role": "instructor"
+      }
+    }
+  },
+  "groups": {
+    "demo-group-1": {
+      "__doc": {
+        "name": "כיתה לדוגמה",
+        "members": [
+          "demo-student-1",
+          "demo-student-2",
+          "demo-student-3",
+          "demo-student-4",
+          "demo-student-5",
+          "demo-student-6",
+          "demo-student-7"
+        ],
+        "instructorId": "demo-instructor-1",
+        "coInstructors": [],
+        "sessionNumber": 12
+      },
+      "sessions": {
+        "demo-session-1": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 1,
+            "createdAt": {
+              "__ts": "2026-06-02T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-02T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-2": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 2,
+            "createdAt": {
+              "__ts": "2026-06-09T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "late",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:12:00Z"
+                },
+                "minutes": 12,
+                "lateReason": "תקלת תחבורה ציבורית"
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "late",
+                "timestamp": {
+                  "__ts": "2026-06-09T09:08:00Z"
+                },
+                "minutes": 8
+              }
+            }
+          }
+        },
+        "demo-session-3": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 3,
+            "createdAt": {
+              "__ts": "2026-06-16T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-16T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-4": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 4,
+            "createdAt": {
+              "__ts": "2026-06-23T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-23T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-5": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 5,
+            "createdAt": {
+              "__ts": "2026-06-30T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "absent",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                },
+                "autoMarked": true
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-06-30T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-6": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 6,
+            "createdAt": {
+              "__ts": "2026-07-07T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-07T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-7": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 7,
+            "createdAt": {
+              "__ts": "2026-07-14T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-14T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-8": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 8,
+            "createdAt": {
+              "__ts": "2026-07-21T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-21T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-9": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 9,
+            "createdAt": {
+              "__ts": "2026-07-28T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "late",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:09:00Z"
+                },
+                "minutes": 9,
+                "lateReason": "תקלת תחבורה ציבורית"
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-07-28T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-10": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 10,
+            "createdAt": {
+              "__ts": "2026-08-04T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "late",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:12:00Z"
+                },
+                "minutes": 12,
+                "lateReason": "פקק תנועה בדרך"
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-04T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-11": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 11,
+            "createdAt": {
+              "__ts": "2026-08-11T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-11T09:00:00Z"
+                }
+              }
+            }
+          }
+        },
+        "demo-session-12": {
+          "__doc": {
+            "status": "open",
+            "sessionNumber": 12,
+            "createdAt": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:00:00Z"
+                }
+              },
+              "demo-student-2": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:00:00Z"
+                }
+              },
+              "demo-student-3": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:00:00Z"
+                }
+              },
+              "demo-student-4": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:00:00Z"
+                }
+              },
+              "demo-student-5": {
+                "status": "late",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:12:00Z"
+                },
+                "minutes": 12,
+                "lateReason": "פקק תנועה בדרך"
+              },
+              "demo-student-6": {
+                "status": "on_time",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:00:00Z"
+                }
+              },
+              "demo-student-7": {
+                "status": "absent",
+                "timestamp": {
+                  "__ts": "2026-08-18T09:00:00Z"
+                },
+                "autoMarked": true
+              }
+            }
+          }
+        }
+      },
+      "leaderboard": {
+        "demo-student-1": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "name": "דנה כהן",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 3,
+            "lastPracticeWeek": "2026-W34",
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            }
+          }
+        },
+        "demo-student-2": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "name": "יוסי לוי",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 3,
+            "lastPracticeWeek": "2026-W34",
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            }
+          }
+        },
+        "demo-student-3": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "name": "מאיה אברהם",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 3,
+            "lastPracticeWeek": "2026-W34",
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 11
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 11
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 11
+            }
+          }
+        },
+        "demo-student-4": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "name": "עומר פרץ",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 3,
+            "lastPracticeWeek": "2026-W34",
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            }
+          }
+        },
+        "demo-student-5": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "name": "שירה מזרחי",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 3,
+            "lastPracticeWeek": "2026-W34",
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 12
+            }
+          }
+        },
+        "demo-student-6": {
+          "__doc": {
+            "uid": "demo-student-6",
+            "name": "אלון גבאי",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 0,
+            "lastPracticeWeek": null,
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 0
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 0
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 0
+            }
+          }
+        },
+        "demo-student-7": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "name": "נועה שרעבי",
+            "lastUpdated": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "currentWeeklyStreak": 1,
+            "lastPracticeWeek": "2026-W34",
+            "allTime": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 7
+            },
+            "monthly_2026-08": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 7
+            },
+            "weekly_2026-W34": {
+              "examSum": 0,
+              "examCount": 0,
+              "practiceCount": 7
+            }
+          }
+        }
+      },
+      "quizQuestions": {
+        "demo-q1": {
+          "__doc": {
+            "question": "מהו הצעד הראשון בבדיקת נפגע בהכרה מלאה?",
+            "correct": "לוודא מקום בטוח",
+            "wrong": [
+              "להתחיל בהחייאה מיד",
+              "להזעיק כוחות בלבד",
+              "להזיז את הנפגע"
+            ],
+            "explanation": "התשובה הנכונה היא: לוודא מקום בטוח.",
+            "sessionNum": 1,
+            "createdAt": {
+              "__ts": "2026-06-02T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q2": {
+          "__doc": {
+            "question": "מהי התדירות המומלצת ללחיצות חזה בהחייאה?",
+            "correct": "100–120 לחיצות בדקה",
+            "wrong": [
+              "40 לחיצות בדקה",
+              "200 לחיצות בדקה",
+              "60 לחיצות בדקה"
+            ],
+            "explanation": "התשובה הנכונה היא: 100–120 לחיצות בדקה.",
+            "sessionNum": 2,
+            "createdAt": {
+              "__ts": "2026-06-09T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q3": {
+          "__doc": {
+            "question": "כיצד פותחים נתיב אוויר בנפגע חסר הכרה?",
+            "correct": "הטיית ראש והרמת סנטר",
+            "wrong": [
+              "כיפוף הראש קדימה",
+              "סיבוב הראש הצידה בלבד",
+              "לחיצה על החזה"
+            ],
+            "explanation": "התשובה הנכונה היא: הטיית ראש והרמת סנטר.",
+            "sessionNum": 3,
+            "createdAt": {
+              "__ts": "2026-06-16T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q4": {
+          "__doc": {
+            "question": "מהו הסימן המרכזי לדימום עורקי?",
+            "correct": "דם אדום בהיר הניתז בקצב הדופק",
+            "wrong": [
+              "דם כהה זולג באיטיות",
+              "נפיחות ללא דם",
+              "כאב ללא דימום"
+            ],
+            "explanation": "התשובה הנכונה היא: דם אדום בהיר הניתז בקצב הדופק.",
+            "sessionNum": 4,
+            "createdAt": {
+              "__ts": "2026-06-23T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q5": {
+          "__doc": {
+            "question": "מה עושים ראשית במקרה של כווייה מדרגה שנייה?",
+            "correct": "קירור באמצעות מים זורמים",
+            "wrong": [
+              "מריחת משחה שומנית מיד",
+              "ניקוב שלפוחיות",
+              "כיסוי בקרח ישיר"
+            ],
+            "explanation": "התשובה הנכונה היא: קירור באמצעות מים זורמים.",
+            "sessionNum": 5,
+            "createdAt": {
+              "__ts": "2026-06-30T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q6": {
+          "__doc": {
+            "question": "מהי תנוחת ההתאוששות מיועדת עבור?",
+            "correct": "נפגע מחוסר הכרה הנושם באופן תקין",
+            "wrong": [
+              "נפגע בדום לב",
+              "נפגע עם שבר בעמוד השדרה",
+              "נפגע בהכרה מלאה"
+            ],
+            "explanation": "התשובה הנכונה היא: נפגע מחוסר הכרה הנושם באופן תקין.",
+            "sessionNum": 6,
+            "createdAt": {
+              "__ts": "2026-07-07T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q7": {
+          "__doc": {
+            "question": "כיצד מזהים חנק מלא (חסימת נתיב אוויר) במבוגר?",
+            "correct": "אינו מסוגל לדבר או לשעול",
+            "wrong": [
+              "שיעול חזק ותקין",
+              "דיבור צלול",
+              "נשימה שקטה ותקינה"
+            ],
+            "explanation": "התשובה הנכונה היא: אינו מסוגל לדבר או לשעול.",
+            "sessionNum": 7,
+            "createdAt": {
+              "__ts": "2026-07-14T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q8": {
+          "__doc": {
+            "question": "מהו הטיפול הראשוני בנקע במפרק הקרסול?",
+            "correct": "קירור, הגבהה וייצוב",
+            "wrong": [
+              "הליכה מיידית על הרגל",
+              "עיסוי נמרץ",
+              "חימום מיידי"
+            ],
+            "explanation": "התשובה הנכונה היא: קירור, הגבהה וייצוב.",
+            "sessionNum": 8,
+            "createdAt": {
+              "__ts": "2026-07-21T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q9": {
+          "__doc": {
+            "question": "מתי יש להפעיל דפיברילטור (AED)?",
+            "correct": "בנפגע בדום לב ללא דופק",
+            "wrong": [
+              "בנפגע בהכרה מלאה",
+              "בנפגע עם כאבי בטן",
+              "בנפגע עם שבר ביד בלבד"
+            ],
+            "explanation": "התשובה הנכונה היא: בנפגע בדום לב ללא דופק.",
+            "sessionNum": 9,
+            "createdAt": {
+              "__ts": "2026-07-28T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q10": {
+          "__doc": {
+            "question": "מהו הסימן האופייני להתקף אפילפסיה?",
+            "correct": "עוויתות בלתי נשלטות ואובדן הכרה",
+            "wrong": [
+              "כאב ראש קל בלבד",
+              "חום גבוה בלבד",
+              "שיעול ממושך"
+            ],
+            "explanation": "התשובה הנכונה היא: עוויתות בלתי נשלטות ואובדן הכרה.",
+            "sessionNum": 10,
+            "createdAt": {
+              "__ts": "2026-08-04T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q11": {
+          "__doc": {
+            "question": "כיצד מטפלים בגוף זר בעין?",
+            "correct": "שטיפה עדינה במים זורמים ופנייה לרופא",
+            "wrong": [
+              "שפשוף העין בעוצמה",
+              "הוצאת הגוף הזר בפינצטה",
+              "כיסוי העין ולחיצה"
+            ],
+            "explanation": "התשובה הנכונה היא: שטיפה עדינה במים זורמים ופנייה לרופא.",
+            "sessionNum": 11,
+            "createdAt": {
+              "__ts": "2026-08-11T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q12": {
+          "__doc": {
+            "question": "מהי הפעולה הראשונה בחשד לשבר בגפה?",
+            "correct": "ייצוב הגפה במצבה הנוכחי",
+            "wrong": [
+              "ניסיון ליישר את הגפה",
+              "הפעלת תנועה בגפה",
+              "עיסוי האזור"
+            ],
+            "explanation": "התשובה הנכונה היא: ייצוב הגפה במצבה הנוכחי.",
+            "sessionNum": 12,
+            "createdAt": {
+              "__ts": "2026-08-18T09:00:00Z"
+            },
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        }
+      },
+      "quizAnswers": {
+        "demo-ans-1": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-1",
+            "answeredAt": {
+              "__ts": "2026-06-02T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-2": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-2",
+            "answeredAt": {
+              "__ts": "2026-06-09T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-3": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-3",
+            "answeredAt": {
+              "__ts": "2026-06-16T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-4": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-4",
+            "answeredAt": {
+              "__ts": "2026-06-23T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-5": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-5",
+            "answeredAt": {
+              "__ts": "2026-06-30T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-6": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-6",
+            "answeredAt": {
+              "__ts": "2026-07-07T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-7": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-7",
+            "answeredAt": {
+              "__ts": "2026-07-14T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-8": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-8",
+            "answeredAt": {
+              "__ts": "2026-07-21T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-9": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-9",
+            "answeredAt": {
+              "__ts": "2026-07-28T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-10": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-10",
+            "answeredAt": {
+              "__ts": "2026-08-04T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-11": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-11",
+            "answeredAt": {
+              "__ts": "2026-08-11T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-12": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-12",
+            "answeredAt": {
+              "__ts": "2026-08-18T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-13": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-1",
+            "answeredAt": {
+              "__ts": "2026-06-02T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-14": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-2",
+            "answeredAt": {
+              "__ts": "2026-06-09T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-15": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-3",
+            "answeredAt": {
+              "__ts": "2026-06-16T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-16": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-4",
+            "answeredAt": {
+              "__ts": "2026-06-23T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-17": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-5",
+            "answeredAt": {
+              "__ts": "2026-06-30T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-18": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-6",
+            "answeredAt": {
+              "__ts": "2026-07-07T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-19": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-7",
+            "answeredAt": {
+              "__ts": "2026-07-14T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-20": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-8",
+            "answeredAt": {
+              "__ts": "2026-07-21T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-21": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-9",
+            "answeredAt": {
+              "__ts": "2026-07-28T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-22": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-10",
+            "answeredAt": {
+              "__ts": "2026-08-04T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-23": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-11",
+            "answeredAt": {
+              "__ts": "2026-08-11T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-24": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-12",
+            "answeredAt": {
+              "__ts": "2026-08-18T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-25": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-1",
+            "answeredAt": {
+              "__ts": "2026-06-02T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-26": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-2",
+            "answeredAt": {
+              "__ts": "2026-06-09T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-27": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-3",
+            "answeredAt": {
+              "__ts": "2026-06-16T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-28": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-4",
+            "answeredAt": {
+              "__ts": "2026-06-23T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-29": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-6",
+            "answeredAt": {
+              "__ts": "2026-07-07T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-30": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-7",
+            "answeredAt": {
+              "__ts": "2026-07-14T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-31": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-3-8",
+            "answeredAt": {
+              "__ts": "2026-07-21T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-32": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-9",
+            "answeredAt": {
+              "__ts": "2026-07-28T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-33": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-10",
+            "answeredAt": {
+              "__ts": "2026-08-04T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-34": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-11",
+            "answeredAt": {
+              "__ts": "2026-08-11T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-35": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-12",
+            "answeredAt": {
+              "__ts": "2026-08-18T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-36": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-1",
+            "answeredAt": {
+              "__ts": "2026-06-02T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-37": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-2",
+            "answeredAt": {
+              "__ts": "2026-06-09T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-38": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-3",
+            "answeredAt": {
+              "__ts": "2026-06-16T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-39": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-4",
+            "answeredAt": {
+              "__ts": "2026-06-23T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-40": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-5",
+            "answeredAt": {
+              "__ts": "2026-06-30T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-41": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-6",
+            "answeredAt": {
+              "__ts": "2026-07-07T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-42": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-7",
+            "answeredAt": {
+              "__ts": "2026-07-14T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-43": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-8",
+            "answeredAt": {
+              "__ts": "2026-07-21T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-44": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-9",
+            "answeredAt": {
+              "__ts": "2026-07-28T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-45": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-10",
+            "answeredAt": {
+              "__ts": "2026-08-04T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-46": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-11",
+            "answeredAt": {
+              "__ts": "2026-08-11T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-47": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-12",
+            "answeredAt": {
+              "__ts": "2026-08-18T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-48": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-1",
+            "answeredAt": {
+              "__ts": "2026-06-02T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-49": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-2",
+            "answeredAt": {
+              "__ts": "2026-06-09T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-50": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-3",
+            "answeredAt": {
+              "__ts": "2026-06-16T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-51": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-4",
+            "answeredAt": {
+              "__ts": "2026-06-23T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-52": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-5",
+            "answeredAt": {
+              "__ts": "2026-06-30T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-53": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-6",
+            "answeredAt": {
+              "__ts": "2026-07-07T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-54": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-7",
+            "answeredAt": {
+              "__ts": "2026-07-14T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-55": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-8",
+            "answeredAt": {
+              "__ts": "2026-07-21T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-56": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-9",
+            "answeredAt": {
+              "__ts": "2026-07-28T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-57": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-10",
+            "answeredAt": {
+              "__ts": "2026-08-04T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-58": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-11",
+            "answeredAt": {
+              "__ts": "2026-08-11T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-59": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-12",
+            "answeredAt": {
+              "__ts": "2026-08-18T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-60": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-1",
+            "answeredAt": {
+              "__ts": "2026-06-02T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-61": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-5",
+            "answeredAt": {
+              "__ts": "2026-06-30T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-62": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-7",
+            "answeredAt": {
+              "__ts": "2026-07-14T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-63": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-7-8",
+            "answeredAt": {
+              "__ts": "2026-07-21T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-64": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-9",
+            "answeredAt": {
+              "__ts": "2026-07-28T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-65": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-10",
+            "answeredAt": {
+              "__ts": "2026-08-04T09:02:00Z"
+            }
+          }
+        },
+        "demo-ans-66": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-11",
+            "answeredAt": {
+              "__ts": "2026-08-11T09:02:00Z"
+            }
+          }
+        }
+      },
+      "notices": {},
+      "quizReports": {},
+      "studentQuizStats": {}
+    }
+  },
+  "questionSuggestions": {}
+}
