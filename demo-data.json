@@ -1,0 +1,1889 @@
+{
+  "users": {
+    "demo-student-1": {
+      "__doc": {
+        "fullName": "דנה כהן",
+        "role": "student",
+        "idNumber": "000000001",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-2": {
+      "__doc": {
+        "fullName": "יוסי לוי",
+        "role": "student",
+        "idNumber": "000000002",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-3": {
+      "__doc": {
+        "fullName": "מאיה אברהם",
+        "role": "student",
+        "idNumber": "000000003",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-4": {
+      "__doc": {
+        "fullName": "עומר פרץ",
+        "role": "student",
+        "idNumber": "000000004",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-5": {
+      "__doc": {
+        "fullName": "שירה מזרחי",
+        "role": "student",
+        "idNumber": "000000005",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-6": {
+      "__doc": {
+        "fullName": "אלון גבאי",
+        "role": "student",
+        "idNumber": "000000006",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-student-7": {
+      "__doc": {
+        "fullName": "נועה שרעבי",
+        "role": "student",
+        "idNumber": "000000007",
+        "activeGroupId": "demo-group-1"
+      }
+    },
+    "demo-instructor-1": {
+      "__doc": {
+        "fullName": "מדריך דמו",
+        "role": "instructor"
+      }
+    }
+  },
+  "groups": {
+    "demo-group-1": {
+      "__doc": {
+        "name": "כיתה לדוגמה",
+        "members": [
+          "demo-student-1",
+          "demo-student-2",
+          "demo-student-3",
+          "demo-student-4",
+          "demo-student-5",
+          "demo-student-6",
+          "demo-student-7"
+        ],
+        "instructorId": "demo-instructor-1",
+        "coInstructors": [],
+        "sessionNumber": 12,
+        "defaultLocation": {
+          "lat": 32.0853,
+          "lng": 34.7818,
+          "name": "כיתה 3, מרכז ההדרכה"
+        }
+      },
+      "sessions": {
+        "demo-session-1": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 1,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 11,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-2": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 2,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "late",
+                "minutes": 5,
+                "lateReason": "איחור מהעבודה"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 10,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-3": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 3,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "late",
+                "minutes": 12,
+                "lateReason": "פקק תנועה בדרך"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 9,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-4": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 4,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 8,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-5": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 5,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "absent",
+                "autoMarked": true
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 7,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-6": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 6,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 6,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-7": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 7,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 5,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-8": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 8,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "late",
+                "minutes": 15,
+                "lateReason": "פקק תנועה בדרך"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "absent",
+                "autoMarked": true
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "absent",
+                "autoMarked": true
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 4,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-9": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 9,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "late",
+                "minutes": 7,
+                "lateReason": "תקלת תחבורה ציבורית"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 3,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-10": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 10,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "late",
+                "minutes": 15,
+                "lateReason": "פקק תנועה בדרך"
+              },
+              "demo-student-5": {
+                "status": "absent",
+                "autoMarked": true
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 2,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-11": {
+          "__doc": {
+            "status": "closed",
+            "sessionNumber": 11,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "late",
+                "minutes": 7,
+                "lateReason": "תקלת תחבורה ציבורית"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "absent",
+                "autoMarked": true
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "expectedStartTime": "18:00",
+            "expectedEndTime": "19:30",
+            "__weeksAgo": 1,
+            "attendanceRadius": 50
+          }
+        },
+        "demo-session-12": {
+          "__doc": {
+            "status": "open",
+            "sessionNumber": 12,
+            "topic": null,
+            "accessCode": null,
+            "attendance": {
+              "demo-student-1": {
+                "status": "on_time"
+              },
+              "demo-student-2": {
+                "status": "on_time"
+              },
+              "demo-student-3": {
+                "status": "on_time"
+              },
+              "demo-student-4": {
+                "status": "on_time"
+              },
+              "demo-student-5": {
+                "status": "on_time"
+              },
+              "demo-student-6": {
+                "status": "on_time"
+              },
+              "demo-student-7": {
+                "status": "on_time"
+              }
+            },
+            "exceptions": {},
+            "graceMins": 10,
+            "instructorLocation": {
+              "lat": 32.0853,
+              "lng": 34.7818
+            },
+            "locationName": "כיתה 3, מרכז ההדרכה",
+            "noGpsMode": false,
+            "__dynamicSchedule": true,
+            "locationIsFallback": false,
+            "attendanceRadius": 20000000
+          }
+        }
+      },
+      "quizQuestions": {
+        "demo-q1-1": {
+          "__doc": {
+            "question": "מהו הצעד הראשון בבדיקת נפגע בהכרה מלאה?",
+            "correct": "לוודא מקום בטוח",
+            "wrong": [
+              "להתחיל בהחייאה מיד",
+              "להזעיק כוחות בלבד",
+              "להזיז את הנפגע"
+            ],
+            "explanation": "לפני כל טיפול יש לוודא שהזירה בטוחה הן למטפל והן לנפגע.",
+            "sessionNum": 1,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q1-2": {
+          "__doc": {
+            "question": "מהי התדירות המומלצת ללחיצות חזה בהחייאה?",
+            "correct": "100–120 לחיצות בדקה",
+            "wrong": [
+              "40 לחיצות בדקה",
+              "200 לחיצות בדקה",
+              "60 לחיצות בדקה"
+            ],
+            "explanation": "קצב של 100–120 לחיצות בדקה הוא הקצב המומלץ לפי הנחיות ההחייאה העדכניות.",
+            "sessionNum": 1,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q1-3": {
+          "__doc": {
+            "question": "כיצד פותחים נתיב אוויר בנפגע חסר הכרה?",
+            "correct": "הטיית ראש והרמת סנטר",
+            "wrong": [
+              "כיפוף הראש קדימה",
+              "סיבוב הראש הצידה בלבד",
+              "לחיצה על החזה"
+            ],
+            "explanation": "הטיית ראש והרמת סנטר מונעות מהלשון לחסום את נתיב האוויר.",
+            "sessionNum": 1,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q1-4": {
+          "__doc": {
+            "question": "מהו הסימן המרכזי לדימום עורקי?",
+            "correct": "דם אדום בהיר הניתז בקצב הדופק",
+            "wrong": [
+              "דם כהה זולג באיטיות",
+              "נפיחות ללא דם",
+              "כאב ללא דימום"
+            ],
+            "explanation": "דימום עורקי מאופיין בצבע בהיר ובזרימה פועמת בקצב הלב.",
+            "sessionNum": 1,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q1-5": {
+          "__doc": {
+            "question": "מה עושים ראשית במקרה של כווייה מדרגה שנייה?",
+            "correct": "קירור באמצעות מים זורמים",
+            "wrong": [
+              "מריחת משחה שומנית מיד",
+              "ניקוב שלפוחיות",
+              "כיסוי בקרח ישיר"
+            ],
+            "explanation": "קירור מיידי במים פוסק את נזק החום ומפחית כאב, בלי לפגוע ברקמה.",
+            "sessionNum": 1,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q1-6": {
+          "__doc": {
+            "question": "מהי תנוחת ההתאוששות מיועדת עבור?",
+            "correct": "נפגע מחוסר הכרה הנושם באופן תקין",
+            "wrong": [
+              "נפגע בדום לב",
+              "נפגע עם שבר בעמוד השדרה",
+              "נפגע בהכרה מלאה"
+            ],
+            "explanation": "התנוחה שומרת על נתיב אוויר פתוח ומונעת שאיפת הקאה.",
+            "sessionNum": 1,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q2": {
+          "__doc": {
+            "question": "כיצד מזהים חנק מלא (חסימת נתיב אוויר) במבוגר?",
+            "correct": "אינו מסוגל לדבר או לשעול",
+            "wrong": [
+              "שיעול חזק ותקין",
+              "דיבור צלול",
+              "נשימה שקטה ותקינה"
+            ],
+            "explanation": "חנק מלא מונע כל מעבר אוויר ולכן גם דיבור ושיעול.",
+            "sessionNum": 2,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q3": {
+          "__doc": {
+            "question": "מהו הטיפול הראשוני בנקע במפרק הקרסול?",
+            "correct": "קירור, הגבהה וייצוב",
+            "wrong": [
+              "הליכה מיידית על הרגל",
+              "עיסוי נמרץ",
+              "חימום מיידי"
+            ],
+            "explanation": "עיקרון ה-RICE (מנוחה, קירור, לחיצה, הגבהה) מפחית נפיחות וכאב.",
+            "sessionNum": 3,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q4": {
+          "__doc": {
+            "question": "מתי יש להפעיל דפיברילטור (AED)?",
+            "correct": "בנפגע בדום לב ללא דופק",
+            "wrong": [
+              "בנפגע בהכרה מלאה",
+              "בנפגע עם כאבי בטן",
+              "בנפגע עם שבר ביד בלבד"
+            ],
+            "explanation": "AED מיועד לזיהוי ותיקון הפרעות קצב מסכנות חיים בדום לב בלבד.",
+            "sessionNum": 4,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q5": {
+          "__doc": {
+            "question": "מהו הסימן האופייני להתקף אפילפסיה?",
+            "correct": "עוויתות בלתי נשלטות ואובדן הכרה",
+            "wrong": [
+              "כאב ראש קל בלבד",
+              "חום גבוה בלבד",
+              "שיעול ממושך"
+            ],
+            "explanation": "התקף כולל בדרך כלל עוויתות מוטוריות ואובדן הכרה זמני.",
+            "sessionNum": 5,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q6": {
+          "__doc": {
+            "question": "כיצד מטפלים בגוף זר בעין?",
+            "correct": "שטיפה עדינה במים זורמים ופנייה לרופא",
+            "wrong": [
+              "שפשוף העין בעוצמה",
+              "הוצאת הגוף הזר בפינצטה",
+              "כיסוי העין ולחיצה"
+            ],
+            "explanation": "שפשוף או ניסיון הוצאה עצמאי עלולים להעמיק את הפגיעה.",
+            "sessionNum": 6,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q7": {
+          "__doc": {
+            "question": "מהי הפעולה הראשונה בחשד לשבר בגפה?",
+            "correct": "ייצוב הגפה במצבה הנוכחית",
+            "wrong": [
+              "ניסיון ליישר את הגפה",
+              "הפעלת תנועה בגפה",
+              "עיסוי האזור"
+            ],
+            "explanation": "ייצוב מונע נזק נוסף לרקמות ולכלי הדם הסמוכים לשבר.",
+            "sessionNum": 7,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q8": {
+          "__doc": {
+            "question": "מה המשמעות של 'זמן זהב' בטיפול בנפגע קשה?",
+            "correct": "פרק הזמן הקריטי לפינוי מהיר לטיפול מציל חיים",
+            "wrong": [
+              "הזמן שלוקח למלא טופס דיווח",
+              "הזמן שנדרש להזמין אמבולנס",
+              "משך ההמתנה עד להגעת המשטרה"
+            ],
+            "explanation": "ככל שהטיפול המקצועי מתחיל מוקדם יותר, כך סיכויי ההחלמה גבוהים יותר.",
+            "sessionNum": 8,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q9": {
+          "__doc": {
+            "question": "כיצד יש להזעיק עזרה נכונה במקרה חירום?",
+            "correct": "לציין מיקום מדויק, מספר נפגעים ותיאור המצב",
+            "wrong": [
+              "להזעיק ולסגור טלפון מיד",
+              "לשלוח הודעת טקסט בלבד",
+              "להמתין שהנפגע יתעורר"
+            ],
+            "explanation": "מידע מדויק וברור מאיץ את הגעת הכוחות ומכוון אותם נכון.",
+            "sessionNum": 9,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q10": {
+          "__doc": {
+            "question": "מהו הסיכון המרכזי בהזזת נפגע עם חשד לפגיעת עמוד שדרה?",
+            "correct": "החמרת נזק עצבי",
+            "wrong": [
+              "התייבשות מהירה",
+              "ירידה בחום הגוף בלבד",
+              "עייפות שרירים"
+            ],
+            "explanation": "תזוזה לא נכונה עלולה לגרום לפגיעה בלתי הפיכה בחוט השדרה.",
+            "sessionNum": 10,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q11": {
+          "__doc": {
+            "question": "מה כולל טיפול ראשוני בעילפון?",
+            "correct": "הרמת רגליים והנחה על הגב במקום מאוורר",
+            "wrong": [
+              "ישיבה זקופה מיידית",
+              "מתן שתייה חמה",
+              "עמידה מיידית"
+            ],
+            "explanation": "הרמת הרגליים מסייעת להחזרת זרימת דם למוח.",
+            "sessionNum": 11,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        },
+        "demo-q12": {
+          "__doc": {
+            "question": "מהו הצעד הראשון בטיפול בהכשת נחש?",
+            "correct": "הרגעת הנפגע ושמירה על אזור הנשיכה נמוך מהלב",
+            "wrong": [
+              "מציצת הרעל בפה",
+              "חסימת זרימת הדם בחוסם עורקים",
+              "חיתוך מקום ההכשה"
+            ],
+            "explanation": "פעולה רגועה ומינימלית מאטה את התפשטות הרעל בגוף.",
+            "sessionNum": 12,
+            "addedByAdmin": false,
+            "suggestedBy": null
+          }
+        }
+      },
+      "quizAnswers": {
+        "demo-ans-1": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q1-3-17",
+            "weeksAgo": 11,
+            "offsetMinutes": 17
+          }
+        },
+        "demo-ans-2": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q1-3-28",
+            "weeksAgo": 11,
+            "offsetMinutes": 28
+          }
+        },
+        "demo-ans-3": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q1-6",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q1-6-7",
+            "weeksAgo": 11,
+            "offsetMinutes": 7
+          }
+        },
+        "demo-ans-4": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q3-15",
+            "weeksAgo": 9,
+            "offsetMinutes": 15
+          }
+        },
+        "demo-ans-5": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q4-3",
+            "weeksAgo": 8,
+            "offsetMinutes": 3
+          }
+        },
+        "demo-ans-6": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q5-10",
+            "weeksAgo": 7,
+            "offsetMinutes": 10
+          }
+        },
+        "demo-ans-7": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q5-24",
+            "weeksAgo": 7,
+            "offsetMinutes": 24
+          }
+        },
+        "demo-ans-8": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-1-demo-q6-13",
+            "weeksAgo": 6,
+            "offsetMinutes": 13
+          }
+        },
+        "demo-ans-9": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q6-21",
+            "weeksAgo": 6,
+            "offsetMinutes": 21
+          }
+        },
+        "demo-ans-10": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q8-2",
+            "weeksAgo": 4,
+            "offsetMinutes": 2
+          }
+        },
+        "demo-ans-11": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q10-7",
+            "weeksAgo": 2,
+            "offsetMinutes": 7
+          }
+        },
+        "demo-ans-12": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q11-11",
+            "weeksAgo": 1,
+            "offsetMinutes": 11
+          }
+        },
+        "demo-ans-13": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q11-24",
+            "weeksAgo": 1,
+            "offsetMinutes": 24
+          }
+        },
+        "demo-ans-14": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-1-1",
+            "weeksAgo": 11,
+            "offsetMinutes": 1
+          }
+        },
+        "demo-ans-15": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-1-26",
+            "weeksAgo": 11,
+            "offsetMinutes": 26
+          }
+        },
+        "demo-ans-16": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-2",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-2-17",
+            "weeksAgo": 11,
+            "offsetMinutes": 17
+          }
+        },
+        "demo-ans-17": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-2",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-2-25",
+            "weeksAgo": 11,
+            "offsetMinutes": 25
+          }
+        },
+        "demo-ans-18": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-3-13",
+            "weeksAgo": 11,
+            "offsetMinutes": 13
+          }
+        },
+        "demo-ans-19": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-4",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-4-19",
+            "weeksAgo": 11,
+            "offsetMinutes": 19
+          }
+        },
+        "demo-ans-20": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-5",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-5-13",
+            "weeksAgo": 11,
+            "offsetMinutes": 13
+          }
+        },
+        "demo-ans-21": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q1-6",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q1-6-2",
+            "weeksAgo": 11,
+            "offsetMinutes": 2
+          }
+        },
+        "demo-ans-22": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q2-20",
+            "weeksAgo": 10,
+            "offsetMinutes": 20
+          }
+        },
+        "demo-ans-23": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q3-3",
+            "weeksAgo": 9,
+            "offsetMinutes": 3
+          }
+        },
+        "demo-ans-24": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q3-21",
+            "weeksAgo": 9,
+            "offsetMinutes": 21
+          }
+        },
+        "demo-ans-25": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q4-15",
+            "weeksAgo": 8,
+            "offsetMinutes": 15
+          }
+        },
+        "demo-ans-26": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q4-39",
+            "weeksAgo": 8,
+            "offsetMinutes": 39
+          }
+        },
+        "demo-ans-27": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q5-5",
+            "weeksAgo": 7,
+            "offsetMinutes": 5
+          }
+        },
+        "demo-ans-28": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q6-7",
+            "weeksAgo": 6,
+            "offsetMinutes": 7
+          }
+        },
+        "demo-ans-29": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q6-38",
+            "weeksAgo": 6,
+            "offsetMinutes": 38
+          }
+        },
+        "demo-ans-30": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-2-demo-q7-16",
+            "weeksAgo": 5,
+            "offsetMinutes": 16
+          }
+        },
+        "demo-ans-31": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q8-2",
+            "weeksAgo": 4,
+            "offsetMinutes": 2
+          }
+        },
+        "demo-ans-32": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q9-13",
+            "weeksAgo": 3,
+            "offsetMinutes": 13
+          }
+        },
+        "demo-ans-33": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q9",
+            "sessionNum": 9,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q9-40",
+            "weeksAgo": 3,
+            "offsetMinutes": 40
+          }
+        },
+        "demo-ans-34": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q10-3",
+            "weeksAgo": 2,
+            "offsetMinutes": 3
+          }
+        },
+        "demo-ans-35": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q10",
+            "sessionNum": 10,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q10-41",
+            "weeksAgo": 2,
+            "offsetMinutes": 41
+          }
+        },
+        "demo-ans-36": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q11-9",
+            "weeksAgo": 1,
+            "offsetMinutes": 9
+          }
+        },
+        "demo-ans-37": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-2-demo-q11-44",
+            "weeksAgo": 1,
+            "offsetMinutes": 44
+          }
+        },
+        "demo-ans-38": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1-1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q1-1-15",
+            "weeksAgo": 11,
+            "offsetMinutes": 15
+          }
+        },
+        "demo-ans-39": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1-2",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q1-2-17",
+            "weeksAgo": 11,
+            "offsetMinutes": 17
+          }
+        },
+        "demo-ans-40": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q1-3-15",
+            "weeksAgo": 11,
+            "offsetMinutes": 15
+          }
+        },
+        "demo-ans-41": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1-4",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q1-4-19",
+            "weeksAgo": 11,
+            "offsetMinutes": 19
+          }
+        },
+        "demo-ans-42": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1-5",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-3-demo-q1-5-16",
+            "weeksAgo": 11,
+            "offsetMinutes": 16
+          }
+        },
+        "demo-ans-43": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q1-6",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-3-demo-q1-6-1",
+            "weeksAgo": 11,
+            "offsetMinutes": 1
+          }
+        },
+        "demo-ans-44": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q2-10",
+            "weeksAgo": 10,
+            "offsetMinutes": 10
+          }
+        },
+        "demo-ans-45": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q4-2",
+            "weeksAgo": 8,
+            "offsetMinutes": 2
+          }
+        },
+        "demo-ans-46": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q5-11",
+            "weeksAgo": 7,
+            "offsetMinutes": 11
+          }
+        },
+        "demo-ans-47": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q6",
+            "sessionNum": 6,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-3-demo-q6-14",
+            "weeksAgo": 6,
+            "offsetMinutes": 14
+          }
+        },
+        "demo-ans-48": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q7",
+            "sessionNum": 7,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q7-1",
+            "weeksAgo": 5,
+            "offsetMinutes": 1
+          }
+        },
+        "demo-ans-49": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q8-20",
+            "weeksAgo": 4,
+            "offsetMinutes": 20
+          }
+        },
+        "demo-ans-50": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q8-24",
+            "weeksAgo": 4,
+            "offsetMinutes": 24
+          }
+        },
+        "demo-ans-51": {
+          "__doc": {
+            "uid": "demo-student-3",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-3-demo-q11-19",
+            "weeksAgo": 1,
+            "offsetMinutes": 19
+          }
+        },
+        "demo-ans-52": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-1",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q1-1-17",
+            "weeksAgo": 11,
+            "offsetMinutes": 17
+          }
+        },
+        "demo-ans-53": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-2",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-demo-q1-2-16",
+            "weeksAgo": 11,
+            "offsetMinutes": 16
+          }
+        },
+        "demo-ans-54": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-2",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q1-2-43",
+            "weeksAgo": 11,
+            "offsetMinutes": 43
+          }
+        },
+        "demo-ans-55": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-demo-q1-3-16",
+            "weeksAgo": 11,
+            "offsetMinutes": 16
+          }
+        },
+        "demo-ans-56": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q1-3-21",
+            "weeksAgo": 11,
+            "offsetMinutes": 21
+          }
+        },
+        "demo-ans-57": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-4",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q1-4-20",
+            "weeksAgo": 11,
+            "offsetMinutes": 20
+          }
+        },
+        "demo-ans-58": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-4",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q1-4-31",
+            "weeksAgo": 11,
+            "offsetMinutes": 31
+          }
+        },
+        "demo-ans-59": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q1-6",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-demo-q1-6-11",
+            "weeksAgo": 11,
+            "offsetMinutes": 11
+          }
+        },
+        "demo-ans-60": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-4-demo-q2-7",
+            "weeksAgo": 10,
+            "offsetMinutes": 7
+          }
+        },
+        "demo-ans-61": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q3-11",
+            "weeksAgo": 9,
+            "offsetMinutes": 11
+          }
+        },
+        "demo-ans-62": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q3",
+            "sessionNum": 3,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q3-32",
+            "weeksAgo": 9,
+            "offsetMinutes": 32
+          }
+        },
+        "demo-ans-63": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q8",
+            "sessionNum": 8,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q8-15",
+            "weeksAgo": 4,
+            "offsetMinutes": 15
+          }
+        },
+        "demo-ans-64": {
+          "__doc": {
+            "uid": "demo-student-4",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-4-demo-q11-11",
+            "weeksAgo": 1,
+            "offsetMinutes": 11
+          }
+        },
+        "demo-ans-65": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-demo-q1-3-9",
+            "weeksAgo": 11,
+            "offsetMinutes": 9
+          }
+        },
+        "demo-ans-66": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q1-4",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-demo-q1-4-19",
+            "weeksAgo": 11,
+            "offsetMinutes": 19
+          }
+        },
+        "demo-ans-67": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q4",
+            "sessionNum": 4,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-5-demo-q4-9",
+            "weeksAgo": 8,
+            "offsetMinutes": 9
+          }
+        },
+        "demo-ans-68": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-demo-q5-4",
+            "weeksAgo": 7,
+            "offsetMinutes": 4
+          }
+        },
+        "demo-ans-69": {
+          "__doc": {
+            "uid": "demo-student-5",
+            "questionId": "demo-q11",
+            "sessionNum": 11,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-5-demo-q11-6",
+            "weeksAgo": 1,
+            "offsetMinutes": 6
+          }
+        },
+        "demo-ans-70": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q1-3",
+            "sessionNum": 1,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-demo-q1-3-12",
+            "weeksAgo": 11,
+            "offsetMinutes": 12
+          }
+        },
+        "demo-ans-71": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q2",
+            "sessionNum": 2,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": false,
+            "attemptId": "attempt-demo-student-7-demo-q2-8",
+            "weeksAgo": 10,
+            "offsetMinutes": 8
+          }
+        },
+        "demo-ans-72": {
+          "__doc": {
+            "uid": "demo-student-7",
+            "questionId": "demo-q5",
+            "sessionNum": 5,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-7-demo-q5-1",
+            "weeksAgo": 7,
+            "offsetMinutes": 1
+          }
+        },
+        "demo-ans-73": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q12-1",
+            "weeksAgo": 0,
+            "offsetMinutes": 1
+          }
+        },
+        "demo-ans-74": {
+          "__doc": {
+            "uid": "demo-student-2",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-2-demo-q12-2",
+            "weeksAgo": 0,
+            "offsetMinutes": 2
+          }
+        },
+        "demo-ans-75": {
+          "__doc": {
+            "uid": "demo-student-1",
+            "questionId": "demo-q12",
+            "sessionNum": 12,
+            "groupId": "demo-group-1",
+            "chosen": "x",
+            "correct": true,
+            "attemptId": "attempt-demo-student-1-demo-q12-3",
+            "weeksAgo": 0,
+            "offsetMinutes": 3
+          }
+        }
+      },
+      "examSeed": [
+        {
+          "uid": "demo-student-2",
+          "weeksAgo": 0,
+          "score": 92
+        },
+        {
+          "uid": "demo-student-2",
+          "weeksAgo": 2,
+          "score": 85
+        },
+        {
+          "uid": "demo-student-3",
+          "weeksAgo": 1,
+          "score": 84
+        },
+        {
+          "uid": "demo-student-4",
+          "weeksAgo": 3,
+          "score": 71
+        },
+        {
+          "uid": "demo-student-7",
+          "weeksAgo": 1,
+          "score": 63
+        }
+      ],
+      "notices": {},
+      "quizReports": {},
+      "studentQuizStats": {}
+    }
+  },
+  "questionSuggestions": {}
+}
