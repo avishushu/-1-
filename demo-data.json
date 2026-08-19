@@ -584,7 +584,7 @@
             "accessCode": null,
             "attendance": {
               "demo-student-1": {
-                "status": "on_time"
+                "status": null
               },
               "demo-student-2": {
                 "status": "on_time"
