@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>מסוף הרשאות · Im Here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0E13;
+    --bg-grid: rgba(255,255,255,0.025);
+    --surface:#12161F;
+    --surface-2:#171C27;
+    --border:#232A38;
+    --border-soft:#1A2029;
+    --text:#E7EBF3;
+    --text-dim:#8A94A6;
+    --text-faint:#565F72;
+    --brand:#5B8DEF;
+    --brand-dim:#5B8DEF33;
+    --allow:#34D399;
+    --allow-dim:#34D39922;
+    --allow-empty:#5FB8A8;
+    --deny:#F76B6B;
+    --deny-dim:#F76B6B22;
+    --warn:#F5B84D;
+    --warn-dim:#F5B84D22;
+    --radius:14px;
+    --radius-sm:9px;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+    --sans: 'Heebo', system-ui, sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:
+      linear-gradient(var(--bg-grid) 1px, transparent 1px) 0 0/100% 34px,
+      var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    min-height:100vh;
+    line-height:1.5;
+  }
+  ::selection{ background: var(--brand-dim); }
+  a{color:var(--brand);}
+
+  /* ── top bar ───────────────────────────────────────────── */
+  .topbar{
+    position:sticky; top:0; z-index:30;
+    display:flex; align-items:center; gap:14px;
+    padding:14px 22px;
+    background:rgba(10,14,19,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--border-soft);
+  }
+  .topbar .mark{
+    width:34px; height:34px; border-radius:9px;
+    background: radial-gradient(120% 120% at 20% 15%, #6FA0FF 0%, #4368CC 60%, #2A4590 100%);
+    display:flex; align-items:center; justify-content:center;
+    font-family:var(--mono); font-weight:700; font-size:15px; color:#fff;
+    box-shadow: 0 0 0 1px rgba(255,255,255,0.08) inset, 0 6px 18px -6px #4368CC88;
+    flex-shrink:0;
+  }
+  .topbar .titles{ display:flex; flex-direction:column; gap:1px; }
+  .topbar h1{ font-size:15.5px; font-weight:700; margin:0; letter-spacing:.2px;}
+  .topbar .sub{ font-size:11.5px; color:var(--text-faint); font-family:var(--mono);}
+  .topbar .spacer{ flex:1; }
+
+  .session-chip{
+    display:flex; align-items:center; gap:10px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:999px; padding:6px 8px 6px 14px;
+    font-size:13px;
+  }
+  .role-dot{ width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+  .role-badge{
+    font-family:var(--mono); font-size:11px; font-weight:600;
+    padding:3px 9px; border-radius:999px; letter-spacing:.3px;
+  }
+  .r-admin{ background:#B78CFF22; color:#C6A6FF; }
+  .r-instructor{ background:#5B8DEF22; color:#8FB0F5; }
+  .r-student{ background:#34D39922; color:#7FE0BE; }
+  .r-frozen{ background:#8A94A622; color:#9AA3B4; }
+  .r-unknown{ background:#8A94A622; color:#8A94A6; }
+  .uid-text{ font-family:var(--mono); font-size:11.5px; color:var(--text-dim); direction:ltr; }
+  .btn-logout{
+    background:transparent; border:1px solid var(--border);
+    color:var(--text-dim); font-family:var(--sans); font-size:12px;
+    padding:6px 12px; border-radius:999px; cursor:pointer;
+  }
+  .btn-logout:hover{ border-color:var(--deny); color:var(--deny); }
+
+  /* ── layout shells ─────────────────────────────────────── */
+  .shell{ max-width:1180px; margin:0 auto; padding:28px 22px 120px; }
+  .hidden{ display:none !important; }
+
+  /* ── login screen ──────────────────────────────────────── */
+  .login-wrap{
+    min-height:calc(100vh - 63px);
+    display:flex; align-items:center; justify-content:center;
+    padding:24px;
+  }
+  .login-card{
+    width:100%; max-width:380px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:30px 28px;
+    box-shadow: 0 30px 60px -30px rgba(0,0,0,0.6);
+  }
+  .login-card h2{ font-size:17px; margin:0 0 4px; }
+  .login-card p.desc{ color:var(--text-dim); font-size:13px; margin:0 0 22px; line-height:1.6;}
+  .field{ margin-bottom:12px; }
+  .field label{ display:block; font-size:12px; color:var(--text-dim); margin-bottom:6px; }
+  .field input{
+    width:100%; background:var(--surface-2); border:1px solid var(--border);
+    color:var(--text); border-radius:var(--radius-sm); padding:10px 12px;
+    font-family:var(--sans); font-size:13.5px; direction:ltr; text-align:left;
+  }
+  .field input:focus{ outline:none; border-color:var(--brand); box-shadow:0 0 0 3px var(--brand-dim); }
+  .btn-primary{
+    width:100%; background:var(--brand); color:#fff; border:none;
+    border-radius:var(--radius-sm); padding:11px; font-family:var(--sans);
+    font-size:14px; font-weight:600; cursor:pointer; margin-top:6px;
+  }
+  .btn-primary:hover{ filter:brightness(1.08); }
+  .btn-primary:disabled{ opacity:.55; cursor:default; }
+  .login-error{
+    margin-top:12px; font-size:12.5px; color:var(--deny);
+    background:var(--deny-dim); border:1px solid #F76B6B33;
+    border-radius:var(--radius-sm); padding:8px 10px; display:none;
+  }
+  .safe-note{
+    display:flex; gap:8px; align-items:flex-start;
+    margin-top:18px; padding:10px 12px;
+    background:var(--surface-2); border:1px solid var(--border-soft);
+    border-radius:var(--radius-sm); font-size:11.5px; color:var(--text-dim); line-height:1.6;
+  }
+
+  /* ── console ───────────────────────────────────────────── */
+  .banner{
+    display:flex; align-items:center; gap:10px;
+    background:var(--allow-dim); border:1px solid #34D39944;
+    color:#8FEBC9; border-radius:var(--radius-sm);
+    padding:9px 14px; font-size:12.5px; margin-bottom:22px;
+  }
+  .banner b{ color:#B4F5DA; }
+
+  .ctx-panel{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:12px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius); padding:16px; margin-bottom:26px;
+  }
+  .ctx-field label{
+    display:block; font-size:11px; color:var(--text-dim); margin-bottom:5px;
+    font-family:var(--mono);
+  }
+  .ctx-field input{
+    width:100%; background:var(--surface-2); border:1px solid var(--border);
+    color:var(--text); border-radius:8px; padding:8px 10px;
+    font-family:var(--mono); font-size:12.5px; direction:ltr; text-align:left;
+  }
+  .ctx-field input:focus{ outline:none; border-color:var(--brand); }
+  .ctx-field .hint{ font-size:10.5px; color:var(--text-faint); margin-top:4px; }
+
+  .section{ margin-bottom:30px; }
+  .section-head{
+    display:flex; align-items:baseline; gap:10px;
+    margin-bottom:10px; padding-bottom:8px;
+    border-bottom:1px solid var(--border-soft);
+  }
+  .section-head .num{ font-family:var(--mono); font-size:11px; color:var(--text-faint); }
+  .section-head h3{ font-size:14.5px; margin:0; font-weight:700; }
+  .section-head .coll{ font-family:var(--mono); font-size:11.5px; color:var(--text-faint); direction:ltr;}
+
+  .row{
+    display:grid;
+    grid-template-columns: 1fr auto 128px;
+    align-items:center; gap:14px;
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:10px; padding:11px 14px; margin-bottom:7px;
+    transition:border-color .15s;
+  }
+  .row:hover{ border-color:#2C3547; }
+  .row .info{ min-width:0; }
+  .row .label{ font-size:13px; font-weight:500; }
+  .row .path{
+    font-family:var(--mono); font-size:11px; color:var(--text-faint);
+    direction:ltr; text-align:left; margin-top:3px;
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+  }
+  .row .hint{ font-size:10.5px; color:var(--text-dim); margin-top:3px; }
+  .row .result{
+    font-family:var(--mono); font-size:11px; text-align:left; direction:ltr;
+    min-width:150px; color:var(--text-faint); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  }
+  .btn-run{
+    font-family:var(--sans); font-size:12.5px; font-weight:600;
+    border-radius:8px; padding:8px 0; cursor:pointer; border:1px solid var(--border);
+    background:var(--surface-2); color:var(--text); width:128px; text-align:center;
+    display:flex; align-items:center; justify-content:center; gap:7px;
+  }
+  .btn-run:hover{ border-color:var(--brand); }
+  .btn-run:disabled{ opacity:.5; cursor:default; }
+  .dot{ width:7px; height:7px; border-radius:50%; background:var(--text-faint); flex-shrink:0; }
+
+  .row[data-status="running"] .btn-run{ border-color:var(--warn); color:var(--warn); }
+  .row[data-status="running"] .dot{ background:var(--warn); animation:pulse 1s infinite ease-in-out; }
+  .row[data-status="allow"] .btn-run{ border-color:var(--allow); color:var(--allow); background:var(--allow-dim); }
+  .row[data-status="allow"] .dot{ background:var(--allow); }
+  .row[data-status="allow"] .result{ color:var(--allow); }
+  .row[data-status="allow-empty"] .btn-run{ border-color:var(--allow-empty); color:var(--allow-empty); }
+  .row[data-status="allow-empty"] .dot{ background:var(--allow-empty); }
+  .row[data-status="allow-empty"] .result{ color:var(--allow-empty); }
+  .row[data-status="deny"] .btn-run{ border-color:var(--deny); color:var(--deny); background:var(--deny-dim); }
+  .row[data-status="deny"] .dot{ background:var(--deny); }
+  .row[data-status="deny"] .result{ color:var(--deny); }
+  .row[data-status="error"] .btn-run{ border-color:var(--warn); color:var(--warn); }
+  .row[data-status="error"] .dot{ background:var(--warn); }
+  .row[data-status="error"] .result{ color:var(--warn); }
+
+  @keyframes pulse{ 0%,100%{opacity:1;} 50%{opacity:.25;} }
+
+  .section-actions{ margin-inline-start:auto; }
+  .btn-run-all{
+    font-family:var(--sans); font-size:11.5px; color:var(--text-dim);
+    background:none; border:1px solid var(--border); border-radius:999px;
+    padding:5px 12px; cursor:pointer;
+  }
+  .btn-run-all:hover{ color:var(--text); border-color:var(--brand); }
+
+  /* ── console log ───────────────────────────────────────── */
+  .log-dock{
+    position:fixed; bottom:0; left:0; right:0; z-index:20;
+    background:rgba(10,14,19,0.94); backdrop-filter:blur(10px);
+    border-top:1px solid var(--border-soft);
+  }
+  .log-head{
+    display:flex; align-items:center; gap:10px;
+    padding:8px 22px; cursor:pointer; user-select:none;
+  }
+  .log-head .t{ font-size:11.5px; color:var(--text-dim); font-family:var(--mono); }
+  .log-head .count{
+    font-family:var(--mono); font-size:10.5px; color:var(--text-faint);
+    background:var(--surface-2); border:1px solid var(--border); border-radius:999px;
+    padding:1px 8px;
+  }
+  .log-head .chev{ margin-inline-start:auto; color:var(--text-faint); font-size:11px; transition:transform .15s; }
+  .log-dock.open .chev{ transform:rotate(180deg); }
+  .log-body{
+    max-height:0; overflow-y:auto; transition:max-height .18s ease;
+    border-top:1px solid transparent;
+    font-family:var(--mono); font-size:11.5px;
+    padding:0 22px;
+  }
+  .log-dock.open .log-body{ max-height:220px; border-top-color:var(--border-soft); padding:10px 22px; }
+  .log-line{ display:flex; gap:10px; padding:3px 0; direction:ltr; text-align:left; white-space:nowrap; }
+  .log-line .lt{ color:var(--text-faint); }
+  .log-line .lk{ width:34px; flex-shrink:0; }
+  .log-line .lp{ color:var(--text-dim); overflow:hidden; text-overflow:ellipsis; }
+  .log-line .lr{ margin-inline-start:auto; padding-inline-start:10px; }
+  .log-empty{ color:var(--text-faint); padding:10px 0; }
+  .log-clear{
+    background:none; border:none; color:var(--text-faint); font-family:var(--sans);
+    font-size:11px; cursor:pointer; text-decoration:underline;
+  }
+</style>
+</head>
+<body>
+
+  <!-- ══════════════ TOP BAR ══════════════ -->
+  <div class="topbar">
+    <div class="mark">{ }</div>
+    <div class="titles">
+      <h1>מסוף הרשאות Firestore</h1>
+      <div class="sub">Im Here · attendancemda</div>
+    </div>
+    <div class="spacer"></div>
+    <div id="session-chip" class="session-chip hidden">
+      <span id="role-dot" class="role-dot" style="background:var(--text-faint)"></span>
+      <span id="role-badge" class="role-badge r-unknown">—</span>
+      <span id="uid-text" class="uid-text">—</span>
+      <button class="btn-logout" id="btn-logout">התנתק</button>
+    </div>
+  </div>
+
+  <!-- ══════════════ LOGIN SCREEN ══════════════ -->
+  <div id="view-login" class="login-wrap">
+    <div class="login-card">
+      <h2>התחברות</h2>
+      <p class="desc">התחבר עם כל משתמש בדיקה קיים (מנהל / מדריך / תלמיד) כדי לבדוק בזמן אמת מה בדיוק מותר לו לקרוא במסד הנתונים, לפי חוקי האבטחה שבאמת פרוסים כרגע.</p>
+      <div class="field">
+        <label for="login-email">אימייל</label>
+        <input id="login-email" type="email" autocomplete="username" placeholder="test-instructor@example.com">
+      </div>
+      <div class="field">
+        <label for="login-pass">סיסמה</label>
+        <input id="login-pass" type="password" autocomplete="current-password" placeholder="••••••••">
+      </div>
+      <button id="btn-login" class="btn-primary">התחבר</button>
+      <div id="login-error" class="login-error"></div>
+      <div class="safe-note">
+        🔒 <span>הכלי הזה <b>קורא בלבד</b> — הוא לא מייבא ולא מפעיל שום פונקציית כתיבה (setDoc / updateDoc / addDoc / deleteDoc), כך שאין שום דרך שהוא ישנה נתונים במסד, גם עם משתמש מנהל.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════ CONSOLE ══════════════ -->
+  <div id="view-console" class="shell hidden">
+
+    <div class="banner">🔒 <span><b>קריאה בלבד</b> — כל כפתור מריץ get/list אמיתי מול Firestore ומציג בדיוק את מה שהחוק מחזיר, כולל הודעת השגיאה המקורית.</span></div>
+
+    <div class="ctx-panel">
+      <div class="ctx-field">
+        <label>gid — מזהה קבוצה</label>
+        <input id="ctx-gid" type="text" placeholder="לדוגמה: aB3xQ...">
+        <div class="hint">נדרש עבור בדיקות תת-אוסף של קבוצה</div>
+      </div>
+      <div class="ctx-field">
+        <label>targetUid — משתמש/תלמיד אחר לבדיקה</label>
+        <input id="ctx-target" type="text" placeholder="uid של משתמש שאינו אני">
+        <div class="hint">לבדיקת דליפה בין משתמשים</div>
+      </div>
+      <div class="ctx-field">
+        <label>idNumber — מספר ת.ז לדוגמה</label>
+        <input id="ctx-idnum" type="text" placeholder="לדוגמה: 123456789">
+        <div class="hint">עבור בדיקת idIndex</div>
+      </div>
+    </div>
+
+    <div id="sections"></div>
+  </div>
+
+  <!-- ══════════════ LOG DOCK ══════════════ -->
+  <div id="log-dock" class="log-dock">
+    <div class="log-head" id="log-toggle">
+      <span class="t">יומן בדיקות</span>
+      <span class="count" id="log-count">0</span>
+      <button class="log-clear" id="log-clear">נקה</button>
+      <span class="chev">▲</span>
+    </div>
+    <div class="log-body" id="log-body">
+      <div class="log-empty">עדיין לא הורצו בדיקות.</div>
+    </div>
+  </div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-app.js";
+import {
+  getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, collection, getDocs, query, where
+} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+// NOTE: intentionally not importing setDoc/updateDoc/addDoc/deleteDoc/writeBatch —
+// this tool is structurally incapable of writing to Firestore.
+
+const firebaseConfig = {
+  apiKey: "AIzaSyADVI0SVjJLWedUmfbqBYtlgw1BslfXtMY",
+  authDomain: "attendancemda.firebaseapp.com",
+  projectId: "attendancemda",
+  storageBucket: "attendancemda.firebasestorage.app",
+  messagingSenderId: "303165146059",
+  appId: "1:303165146059:web:cf698f5837c0ee96702c4e"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+/* ═══════════════ context (gid / targetUid / idNumber / myUid) ═══════════════ */
+const ctxInputs = {
+  gid: document.getElementById('ctx-gid'),
+  targetUid: document.getElementById('ctx-target'),
+  idNumber: document.getElementById('ctx-idnum'),
+};
+function getCtx(){
+  return {
+    myUid: auth.currentUser ? auth.currentUser.uid : '',
+    gid: ctxInputs.gid.value.trim(),
+    targetUid: ctxInputs.targetUid.value.trim(),
+    idNumber: ctxInputs.idNumber.value.trim(),
+  };
+}
+
+/* ═══════════════ test catalog — mirrors every match block in firestore.rules ═══════════════ */
+// kind: 'get' (single document) or 'list' (collection/query)
+// need: which ctx fields must be non-empty before this test can run
+const SECTIONS = [
+  {
+    title: 'זהות — users/{uid}', coll: '/users/{uid}',
+    rows: [
+      { label:'קרא את פרופיל המשתמש שלי', hint:'אמור להיות מותר לכל משתמש מחובר',
+        need:[], kind:'get', pathOf:c=>`users/${c.myUid}`,
+        ref:c=>doc(db,'users',c.myUid) },
+      { label:'קרא פרופיל של משתמש אחר', hint:'מותר רק למנהל',
+        need:['targetUid'], kind:'get', pathOf:c=>`users/${c.targetUid}`,
+        ref:c=>doc(db,'users',c.targetUid) },
+      { label:'רשימת כל המשתמשים (ללא סינון)', hint:'מותר רק למנהל',
+        need:[], kind:'list', pathOf:()=>`users`,
+        ref:()=>collection(db,'users') },
+    ]
+  },
+  {
+    title:'קבוצות — groups/{gid}', coll:'/groups/{gid}',
+    rows:[
+      { label:'קרא קבוצה לפי מזהה', hint:'מותר רק לחבר/מדריך/מנהל של הקבוצה הזו',
+        need:['gid'], kind:'get', pathOf:c=>`groups/${c.gid}`,
+        ref:c=>doc(db,'groups',c.gid) },
+      { label:'הקבוצות שאני מדריך ראשי בהן', hint:'שאילתה מסוננת instructorId==myUid — מותר למדריך',
+        need:[], kind:'list', pathOf:c=>`groups where instructorId==${c.myUid}`,
+        ref:c=>query(collection(db,'groups'), where('instructorId','==',c.myUid)) },
+      { label:'הקבוצות שאני חבר בהן', hint:'שאילתה מסוננת members contains myUid — מותר לחבר',
+        need:[], kind:'list', pathOf:c=>`groups where members contains ${c.myUid}`,
+        ref:c=>query(collection(db,'groups'), where('members','array-contains',c.myUid)) },
+      { label:'רשימת כל הקבוצות (ללא סינון)', hint:'מותר רק למנהל',
+        need:[], kind:'list', pathOf:()=>`groups`,
+        ref:()=>collection(db,'groups') },
+    ]
+  },
+  {
+    title:'תת-אוספים של קבוצה (דורש gid)', coll:'/groups/{gid}/…',
+    rows:[
+      { label:'מפגשים (sessions)', hint:'חברי/מדריך/מנהל הקבוצה',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/sessions`,
+        ref:c=>collection(db,'groups',c.gid,'sessions') },
+      { label:'מטא (meta)', hint:'מדריך/מנהל הקבוצה בלבד',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/meta`,
+        ref:c=>collection(db,'groups',c.gid,'meta') },
+      { label:'הודעות (notices)', hint:'חברי/מדריך/מנהל הקבוצה',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/notices`,
+        ref:c=>collection(db,'groups',c.gid,'notices') },
+      { label:'בנק שאלות (quizQuestions)', hint:'חברי/מדריך/מנהל הקבוצה',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/quizQuestions`,
+        ref:c=>collection(db,'groups',c.gid,'quizQuestions') },
+      { label:'תשובות ישנות (quizAnswers — אוסף נעול)', hint:'מנהל בלבד — לא בשימוש חי',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/quizAnswers`,
+        ref:c=>collection(db,'groups',c.gid,'quizAnswers') },
+      { label:'דיווחי שאלה — הכל (quizReports, ללא סינון)', hint:'מדריך/מנהל תמיד; לתלמיד צריך שאילתה מסוננת (הבדיקה הבאה)',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/quizReports`,
+        ref:c=>collection(db,'groups',c.gid,'quizReports') },
+      { label:'דיווחי שאלה שלי (מסונן reporterUid==myUid)', hint:'מותר לכל תלמיד על הדיווחים של עצמו',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/quizReports where reporterUid==${c.myUid}`,
+        ref:c=>query(collection(db,'groups',c.gid,'quizReports'), where('reporterUid','==',c.myUid)) },
+      { label:'לוח מובילים (leaderboard)', hint:'חברי/מדריך/מנהל הקבוצה',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/leaderboard`,
+        ref:c=>collection(db,'groups',c.gid,'leaderboard') },
+      { label:'סטטיסטיקת בוחן — שלי', hint:'מותר לכל תלמיד לקרוא את עצמו',
+        need:['gid'], kind:'get', pathOf:c=>`groups/${c.gid}/studentQuizStats/${c.myUid}`,
+        ref:c=>doc(db,'groups',c.gid,'studentQuizStats',c.myUid) },
+      { label:'סטטיסטיקת בוחן — תלמיד אחר', hint:'מדריך/מנהל הקבוצה בלבד',
+        need:['gid','targetUid'], kind:'get', pathOf:c=>`groups/${c.gid}/studentQuizStats/${c.targetUid}`,
+        ref:c=>doc(db,'groups',c.gid,'studentQuizStats',c.targetUid) },
+      { label:'סטטיסטיקת בוחן — כל התלמידים (list)', hint:'מדריך/מנהל בלבד — תלמיד אמור להיחסם',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/studentQuizStats`,
+        ref:c=>collection(db,'groups',c.gid,'studentQuizStats') },
+      { label:'רוסטר — הרשומה שלי', hint:'מותר לכל תלמיד לקרוא את עצמו',
+        need:['gid'], kind:'get', pathOf:c=>`groups/${c.gid}/roster/${c.myUid}`,
+        ref:c=>doc(db,'groups',c.gid,'roster',c.myUid) },
+      { label:'רוסטר — רשומת תלמיד אחר', hint:'מדריך/מנהל הקבוצה בלבד',
+        need:['gid','targetUid'], kind:'get', pathOf:c=>`groups/${c.gid}/roster/${c.targetUid}`,
+        ref:c=>doc(db,'groups',c.gid,'roster',c.targetUid) },
+      { label:'רוסטר — כל הקבוצה (list)', hint:'מדריך/מנהל בלבד — תלמיד אמור להיחסם',
+        need:['gid'], kind:'list', pathOf:c=>`groups/${c.gid}/roster`,
+        ref:c=>collection(db,'groups',c.gid,'roster') },
+    ]
+  },
+  {
+    title:'אינדקס ת.ז — idIndex/{idNumber}', coll:'/idIndex/{idNumber}',
+    rows:[
+      { label:'חיפוש לפי מספר ת.ז', hint:'מדריך/מנהל בלבד',
+        need:['idNumber'], kind:'get', pathOf:c=>`idIndex/${c.idNumber}`,
+        ref:c=>doc(db,'idIndex',c.idNumber) },
+      { label:'רשימת כל הת.ז (list)', hint:'חסום לחלוטין לכולם — גם למנהל',
+        need:[], kind:'list', pathOf:()=>`idIndex`,
+        ref:()=>collection(db,'idIndex') },
+    ]
+  },
+  {
+    title:'שונות — אוספים ברמה עליונה', coll:'/…',
+    rows:[
+      { label:'הצעות שאלה — הכל (ללא סינון)', hint:'מדריך/מנהל תמיד; משתמש רגיל רק דרך שדה submittedBy',
+        need:[], kind:'list', pathOf:()=>`questionSuggestions`,
+        ref:()=>collection(db,'questionSuggestions') },
+      { label:'הודעות פרטיות — הכל (ללא סינון)', hint:'מנהל בלבד',
+        need:[], kind:'list', pathOf:()=>`userMessages`,
+        ref:()=>collection(db,'userMessages') },
+      { label:'הודעות פרטיות שלי — שנשלחו', hint:'מסונן fromUid==myUid — מותר לכל משתמש',
+        need:[], kind:'list', pathOf:c=>`userMessages where fromUid==${c.myUid}`,
+        ref:c=>query(collection(db,'userMessages'), where('fromUid','==',c.myUid)) },
+      { label:'הודעות פרטיות שלי — שהתקבלו', hint:'מסונן toUid==myUid — מותר לכל משתמש',
+        need:[], kind:'list', pathOf:c=>`userMessages where toUid==${c.myUid}`,
+        ref:c=>query(collection(db,'userMessages'), where('toUid','==',c.myUid)) },
+      { label:'הודעות מערכת (systemBroadcasts)', hint:'מותר לכל משתמש מחובר',
+        need:[], kind:'list', pathOf:()=>`systemBroadcasts`,
+        ref:()=>collection(db,'systemBroadcasts') },
+      { label:'הגדרות מערכת (systemSettings)', hint:'פתוח לכולם, גם ללא התחברות',
+        need:[], kind:'list', pathOf:()=>`systemSettings`,
+        ref:()=>collection(db,'systemSettings') },
+      { label:'בקשות איפוס סיסמה', hint:'מנהל בלבד',
+        need:[], kind:'list', pathOf:()=>`passwordResetRequests`,
+        ref:()=>collection(db,'passwordResetRequests') },
+      { label:'לוג מערכת (systemLog)', hint:'מנהל בלבד',
+        need:[], kind:'list', pathOf:()=>`systemLog`,
+        ref:()=>collection(db,'systemLog') },
+    ]
+  },
+];
+
+/* ═══════════════ render sections/rows ═══════════════ */
+const sectionsEl = document.getElementById('sections');
+let rowRegistry = []; // {rowEl, pathEl, resultEl, def}
+
+SECTIONS.forEach((section, si) => {
+  const sec = document.createElement('div');
+  sec.className = 'section';
+
+  const head = document.createElement('div');
+  head.className = 'section-head';
+  head.innerHTML = `
+    <span class="num">${String(si+1).padStart(2,'0')}</span>
+    <h3>${section.title}</h3>
+    <span class="coll">${section.coll}</span>
+    <span class="section-actions"><button class="btn-run-all">הרץ הכל</button></span>
+  `;
+  sec.appendChild(head);
+
+  const rowsWrap = document.createElement('div');
+  const rowEls = [];
+
+  section.rows.forEach(def => {
+    const row = document.createElement('div');
+    row.className = 'row';
+    row.dataset.status = 'idle';
+    row.innerHTML = `
+      <div class="info">
+        <div class="label">${def.label}</div>
+        <div class="path"></div>
+        <div class="hint">${def.hint}</div>
+      </div>
+      <div class="result">—</div>
+      <button class="btn-run"><span class="dot"></span><span class="btn-text">${def.kind === 'get' ? 'GET' : 'LIST'}</span></button>
+    `;
+    rowsWrap.appendChild(row);
+    const entry = {
+      rowEl: row,
+      pathEl: row.querySelector('.path'),
+      resultEl: row.querySelector('.result'),
+      btnEl: row.querySelector('.btn-run'),
+      def
+    };
+    row.querySelector('.btn-run').addEventListener('click', () => runOne(entry));
+    rowEls.push(entry);
+  });
+
+  sec.appendChild(rowsWrap);
+  sectionsEl.appendChild(sec);
+  head.querySelector('.btn-run-all').addEventListener('click', () => {
+    rowEls.forEach(e => runOne(e));
+  });
+  rowRegistry.push(...rowEls);
+});
+
+function refreshPaths(){
+  const c = getCtx();
+  rowRegistry.forEach(e => { e.pathEl.textContent = e.def.pathOf(c); });
+}
+Object.values(ctxInputs).forEach(inp => inp.addEventListener('input', refreshPaths));
+
+/* ═══════════════ test execution ═══════════════ */
+const logBody = document.getElementById('log-body');
+const logCount = document.getElementById('log-count');
+let logEntries = 0;
+
+function pushLog(kind, pathText, statusText, colorVar){
+  if (logEntries === 0) logBody.innerHTML = '';
+  const line = document.createElement('div');
+  line.className = 'log-line';
+  const time = new Date().toLocaleTimeString('he-IL', {hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  line.innerHTML = `
+    <span class="lt">${time}</span>
+    <span class="lk">${kind}</span>
+    <span class="lp">${pathText}</span>
+    <span class="lr" style="color:${colorVar}">${statusText}</span>
+  `;
+  logBody.prepend(line);
+  logEntries++;
+  logCount.textContent = logEntries;
+}
+
+async function runOne(entry){
+  const c = getCtx();
+  const def = entry.def;
+  if (!c.myUid){ return; }
+  for (const field of def.need){
+    if (!c[field]){
+      entry.rowEl.dataset.status = 'error';
+      entry.resultEl.textContent = `חסר קלט: ${field}`;
+      return;
+    }
+  }
+  entry.rowEl.dataset.status = 'running';
+  entry.resultEl.textContent = 'רץ…';
+  entry.btnEl.disabled = true;
+  const pathText = def.pathOf(c);
+  entry.pathEl.textContent = pathText;
+
+  const t0 = performance.now();
+  try {
+    if (def.kind === 'get'){
+      const snap = await getDoc(def.ref(c));
+      const ms = Math.round(performance.now() - t0);
+      if (!snap.exists()){
+        entry.rowEl.dataset.status = 'allow-empty';
+        entry.resultEl.textContent = `אושר · לא קיים (${ms}ms)`;
+        pushLog('GET', pathText, `200 · not-found (${ms}ms)`, 'var(--allow-empty)');
+      } else {
+        const keys = Object.keys(snap.data());
+        entry.rowEl.dataset.status = 'allow';
+        entry.resultEl.textContent = `אושר · ${keys.length} שדות (${ms}ms)`;
+        pushLog('GET', pathText, `200 ALLOWED (${ms}ms)`, 'var(--allow)');
+      }
+    } else {
+      const snap = await getDocs(def.ref(c));
+      const ms = Math.round(performance.now() - t0);
+      if (snap.empty){
+        entry.rowEl.dataset.status = 'allow-empty';
+        entry.resultEl.textContent = `אושר · 0 מסמכים (${ms}ms)`;
+        pushLog('LIST', pathText, `200 · 0 docs (${ms}ms)`, 'var(--allow-empty)');
+      } else {
+        entry.rowEl.dataset.status = 'allow';
+        entry.resultEl.textContent = `אושר · ${snap.size} מסמכים (${ms}ms)`;
+        pushLog('LIST', pathText, `200 ALLOWED · ${snap.size} docs (${ms}ms)`, 'var(--allow)');
+      }
+    }
+  } catch(e){
+    const ms = Math.round(performance.now() - t0);
+    if (e.code === 'permission-denied'){
+      entry.rowEl.dataset.status = 'deny';
+      entry.resultEl.textContent = `נחסם (${ms}ms)`;
+      pushLog(def.kind === 'get' ? 'GET':'LIST', pathText, `403 permission-denied (${ms}ms)`, 'var(--deny)');
+    } else {
+      entry.rowEl.dataset.status = 'error';
+      entry.resultEl.textContent = `שגיאה: ${e.code || e.message}`;
+      pushLog(def.kind === 'get' ? 'GET':'LIST', pathText, `ERROR ${e.code || e.message} (${ms}ms)`, 'var(--warn)');
+    }
+  } finally {
+    entry.btnEl.disabled = false;
+  }
+}
+
+document.getElementById('log-clear').addEventListener('click', (ev) => {
+  ev.stopPropagation();
+  logBody.innerHTML = '<div class="log-empty">עדיין לא הורצו בדיקות.</div>';
+  logEntries = 0;
+  logCount.textContent = '0';
+});
+document.getElementById('log-toggle').addEventListener('click', (ev) => {
+  if (ev.target.id === 'log-clear') return;
+  document.getElementById('log-dock').classList.toggle('open');
+});
+
+/* ═══════════════ auth ═══════════════ */
+const viewLogin = document.getElementById('view-login');
+const viewConsole = document.getElementById('view-console');
+const sessionChip = document.getElementById('session-chip');
+const roleDot = document.getElementById('role-dot');
+const roleBadge = document.getElementById('role-badge');
+const uidText = document.getElementById('uid-text');
+const loginError = document.getElementById('login-error');
+
+document.getElementById('btn-login').addEventListener('click', async () => {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  loginError.style.display = 'none';
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true; btn.textContent = 'מתחבר…';
+  try {
+    await signInWithEmailAndPassword(auth, email, pass);
+  } catch(e){
+    loginError.textContent = 'התחברות נכשלה: ' + (e.code || e.message);
+    loginError.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'התחבר';
+  }
+});
+
+document.getElementById('btn-logout').addEventListener('click', () => signOut(auth));
+
+const ROLE_META = {
+  admin:      {cls:'r-admin',      dot:'#C6A6FF', label:'מנהל'},
+  instructor: {cls:'r-instructor', dot:'#8FB0F5', label:'מדריך'},
+  student:    {cls:'r-student',    dot:'#7FE0BE', label:'תלמיד'},
+  frozen:     {cls:'r-frozen',     dot:'#9AA3B4', label:'מוקפא'},
+};
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user){
+    viewLogin.classList.remove('hidden');
+    viewConsole.classList.add('hidden');
+    sessionChip.classList.add('hidden');
+    return;
+  }
+  viewLogin.classList.add('hidden');
+  viewConsole.classList.remove('hidden');
+  sessionChip.classList.remove('hidden');
+  uidText.textContent = user.uid;
+
+  roleBadge.className = 'role-badge r-unknown';
+  roleBadge.textContent = 'בודק…';
+  roleDot.style.background = 'var(--text-faint)';
+
+  try {
+    const snap = await getDoc(doc(db, 'users', user.uid));
+    if (snap.exists()){
+      const role = snap.data().role;
+      const meta = ROLE_META[role] || {cls:'r-unknown', dot:'#8A94A6', label: role || 'לא ידוע'};
+      roleBadge.className = 'role-badge ' + meta.cls;
+      roleBadge.textContent = meta.label;
+      roleDot.style.background = meta.dot;
+    } else {
+      roleBadge.className = 'role-badge r-unknown';
+      roleBadge.textContent = 'אין מסמך';
+    }
+  } catch(e){
+    roleBadge.className = 'role-badge r-unknown';
+    roleBadge.textContent = 'שגיאה';
+  }
+
+  refreshPaths();
+});
+</script>
+</body>
+</html>
