@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>קבלת Token לבדיקה</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 480px; margin: 24px auto; padding: 0 16px; }
+  input { width: 100%; padding: 10px; margin: 6px 0; box-sizing: border-box; font-size: 16px; }
+  button { width: 100%; padding: 12px; margin-top: 8px; font-size: 16px; background: #6d28d9; color: #fff; border: none; border-radius: 6px; }
+  textarea { width: 100%; height: 160px; margin-top: 16px; font-size: 11px; direction: ltr; }
+  .msg { margin-top: 12px; padding: 10px; border-radius: 6px; font-size: 14px; }
+  .err { background: #fee2e2; color: #991b1b; }
+  .ok { background: #dcfce7; color: #166534; }
+</style>
+</head>
+<body>
+  <h2>קבלת ID Token — לבדיקה בלבד</h2>
+  <p>עמוד זמני, לא חלק מהאפליקציה. מתחבר לאותו פרויקט Firebase כדי להוציא token אמיתי להדבקה ב-reqbin.</p>
+
+  <input id="email" type="email" placeholder="אימייל" autocomplete="username">
+  <input id="password" type="password" placeholder="סיסמה" autocomplete="current-password">
+  <button id="loginBtn">התחבר וקבל Token</button>
+
+  <div id="message"></div>
+  <textarea id="tokenBox" readonly placeholder="ה-Token יופיע כאן..."></textarea>
+
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyADVI0SVjJLWedUmfbqBYtlgw1BslfXtMY",
+    authDomain: "attendancemda.firebaseapp.com",
+    projectId: "attendancemda",
+    storageBucket: "attendancemda.firebasestorage.app",
+    messagingSenderId: "303165146059",
+    appId: "1:303165146059:web:cf698f5837c0ee96702c4e"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  const messageDiv = document.getElementById('message');
+  const tokenBox = document.getElementById('tokenBox');
+
+  document.getElementById('loginBtn').addEventListener('click', async () => {
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value;
+    messageDiv.className = 'msg';
+    messageDiv.textContent = 'מתחבר...';
+    tokenBox.value = '';
+
+    try {
+      const cred = await signInWithEmailAndPassword(auth, email, password);
+      const token = await cred.user.getIdToken();
+      messageDiv.className = 'msg ok';
+      messageDiv.textContent = 'התחברות הצליחה. ה-Token למטה — לחיצה ארוכה כדי לבחור הכל ולהעתיק.';
+      tokenBox.value = token;
+      tokenBox.focus();
+      tokenBox.select();
+    } catch (err) {
+      messageDiv.className = 'msg err';
+      messageDiv.textContent = 'שגיאה: ' + err.message;
+    }
+  });
+</script>
+</body>
+</html>
