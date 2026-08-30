@@ -1,4 +1,4 @@
-const VERSION = 'v1.1.0'; // עדכן ידנית בכל דיפלוי משמעותי — שינוי הגרסה מנקה את המטמון הישן אוטומטית
+const VERSION = 'v1.1.2'; // עדכן ידנית בכל דיפלוי משמעותי — שינוי הגרסה מנקה את המטמון הישן אוטומטית
 const CACHE_NAME = `im-here-${VERSION}`;
 
 // קבצי ה"מעטפת" של האפליקציה — נשמרים במטמון מיד בהתקנה כדי שהאפליקציה תיפתח
@@ -103,4 +103,73 @@ self.addEventListener('fetch', (event) => {
 
     // Anything else (e.g. the on-demand eruda dev-console CDN script): let the
     // browser handle it normally, no SW involvement.
+});
+
+// =====================================================
+// PUSH NOTIFICATIONS
+// =====================================================
+// No separate firebase-messaging-sw.js on purpose (see im-here push-notification
+// work) — a second service worker would compete with this one for the same
+// scope/lifecycle. Handling the raw Web Push 'push' event ourselves means we're
+// fully responsible for calling showNotification (the browser will NOT
+// auto-display anything on our behalf once a 'push' listener exists), but it
+// keeps everything — caching, offline shell, and now push — in one file.
+//
+// Payload shape sent by the Make.com scenario → FCM "Send a message" module:
+// a `notification: {title, body}` block (rendered by us below) plus a
+// `data: {url}` field carrying the in-app screen to open on click. Falls back
+// gracefully if either block is missing so a malformed/legacy payload still
+// shows *something* rather than silently doing nothing.
+self.addEventListener('push', (event) => {
+    let payload = {};
+    try {
+        payload = event.data ? event.data.json() : {};
+    } catch (err) {
+        console.warn('Push payload was not valid JSON:', err);
+    }
+
+    const notif = payload.notification || {};
+    const data = payload.data || {};
+
+    const title = notif.title || data.title || 'Im Here';
+    const body = notif.body || data.body || '';
+    const targetUrl = data.url || './';
+
+    const options = {
+        body,
+        icon: './micon2.png',
+        badge: './micon4.png',
+        dir: 'rtl',
+        lang: 'he',
+        data: { url: targetUrl },
+    };
+
+    event.waitUntil(self.registration.showNotification(title, options));
+});
+
+// Click handling: focus an already-open tab and navigate it to the relevant
+// in-app screen if one exists, otherwise open a fresh tab there. Mirrors the
+// "click navigates user to the relevant in-app screen" requirement from the
+// push-notifications design.
+self.addEventListener('notificationclick', (event) => {
+    event.notification.close();
+
+    const rawUrl = (event.notification.data && event.notification.data.url) || './';
+    const targetUrl = new URL(rawUrl, self.location.origin).href;
+
+    event.waitUntil(
+        clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clientList) => {
+            for (const client of clientList) {
+                if (client.url && new URL(client.url).origin === self.location.origin && 'focus' in client) {
+                    if ('navigate' in client) {
+                        return client.navigate(targetUrl).then((c) => c.focus());
+                    }
+                    return client.focus();
+                }
+            }
+            if (clients.openWindow) {
+                return clients.openWindow(targetUrl);
+            }
+        })
+    );
 });
