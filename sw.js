@@ -137,7 +137,7 @@ self.addEventListener('push', (event) => {
 
     const options = {
         body,
-        icon: './micon2.png',
+        icon: './micon4.png',
         badge: './micon4.png',
         dir: 'rtl',
         lang: 'he',
