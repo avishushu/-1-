@@ -4,7 +4,7 @@
       "__doc": {
         "fullName": "דנה כהן",
         "role": "student",
-        "idNumber": "000000001",
+        "idNumber": "123456789",
         "activeGroupId": "demo-group-1"
       }
     },
@@ -58,7 +58,7 @@
     },
     "demo-instructor-1": {
       "__doc": {
-        "fullName": "מדריך דמו",
+        "fullName": "מדריך הדמיה",
         "role": "instructor"
       }
     }
@@ -609,7 +609,7 @@
               "lng": 34.7818
             },
             "locationName": "כיתה 3, מרכז ההדרכה",
-            "noGpsMode": false,
+            "noGpsMode": true,
             "__dynamicSchedule": true,
             "locationIsFallback": false,
             "attendanceRadius": 20000000
