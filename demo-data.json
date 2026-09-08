@@ -578,30 +578,11 @@
         },
         "demo-session-12": {
           "__doc": {
-            "status": "open",
+            "status": "scheduled",
             "sessionNumber": 12,
             "topic": "פענוח אק''ג",
             "accessCode": null,
-            "attendance": {
-              "demo-student-2": {
-                "status": "on_time"
-              },
-              "demo-student-3": {
-                "status": "on_time"
-              },
-              "demo-student-4": {
-                "status": "on_time"
-              },
-              "demo-student-5": {
-                "status": "on_time"
-              },
-              "demo-student-6": {
-                "status": "on_time"
-              },
-              "demo-student-7": {
-                "status": "on_time"
-              }
-            },
+            "attendance": {},
             "exceptions": {},
             "graceMins": 10,
             "instructorLocation": {
