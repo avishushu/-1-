@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#050505">
+    <title>Hodaya Beauty | Native PWA Experience</title>
+
+    <!-- Tailwind CSS & Google Fonts -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#050505',
+                            rose: '#be185d',
+                            pink: '#fce7f3',
+                            glass: 'rgba(255, 255, 255, 0.08)',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Assistant', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite alternate',
+                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '100%': { transform: 'translate(20px, -30px) scale(1.1)' },
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        :root {
+            --sat: env(safe-area-inset-top);
+            --sab: env(safe-area-inset-bottom);
+        }
+
+        body {
+            background-color: #050505;
+            color: #fdfbfb;
+            user-select: none;
+            -webkit-user-select: none;
+            overscroll-behavior-y: contain;
+            -webkit-tap-highlight-color: transparent;
+            overflow-x: hidden;
+            padding-top: var(--sat);
+            padding-bottom: calc(80px + var(--sab));
+        }
+
+        .tabular-nums { font-variant-numeric: tabular-nums; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        .hero-mask {
+            mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 65%, transparent 100%);
+        }
+
+        /* הגדרת Parallax עוצמתי וסופר-חלק */
+        #parallaxMedia {
+            will-change: transform;
+            transition: transform 0.05s linear;
+        }
+
+        .smart-header { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .smart-header-inner { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .smart-header.scrolled { padding-top: calc(12px + var(--sat)); padding-left: 20px; padding-right: 20px; }
+        .smart-header.scrolled .smart-header-inner {
+            background: rgba(20, 20, 20, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+            padding: 10px 20px;
+            border-radius: 9999px;
+        }
+
+        .bottom-sheet { transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        .glass-nav {
+            background: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .service-card {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            will-change: transform, opacity;
+        }
+    </style>
+</head>
+<body class="antialiased relative">
+
+    <!-- אורות רקע -->
+    <div class="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
+        <div class="absolute top-[10%] right-[-10%] w-[250px] h-[250px] bg-pink-700/20 rounded-full mix-blend-screen filter blur-[80px] animate-blob"></div>
+        <div class="absolute bottom-[20%] left-[-10%] w-[250px] h-[250px] bg-purple-700/20 rounded-full mix-blend-screen filter blur-[80px]" style="animation-delay: 2s;"></div>
+    </div>
+
+    <div class="max-w-md mx-auto relative min-h-screen">
+        
+        <!-- Header -->
+        <div id="headerNav" class="smart-header fixed top-0 w-full max-w-md z-40 p-6">
+            <div class="smart-header-inner flex justify-between items-center">
+                <span class="font-serif italic font-bold text-xl tracking-wider">Hodaya.</span>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs bg-white/10 px-3 py-1 rounded-full text-gray-300">שלום, נועה ✨</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Header עם Parallax משופר -->
+        <header class="relative h-[65vh] w-full hero-mask overflow-hidden">
+            <!-- קונטיינר מוגדל (140%) המאפשר תנועה רחבה של התמונה ללא שוליים לבנים -->
+            <div id="parallaxMedia" class="absolute inset-0 w-full h-[140%] -top-[20%]">
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1200" alt="Hodaya Beauty Studio" class="w-full h-full object-cover opacity-85">
+            </div>
+            
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/30 to-transparent"></div>
+
+            <div class="absolute bottom-16 right-6 left-6 z-10">
+                <h1 class="font-serif text-5xl font-bold mb-3 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
+                    Hodaya<br><span class="text-brand-rose italic font-light">Beauty</span>
+                </h1>
+                <p class="text-gray-300 font-light tracking-wide text-lg opacity-0 animate-fade-in-up" style="animation-delay: 0.4s;">
+                    אמנות, טיפוח ויוקרה.
+                </p>
+            </div>
+        </header>
+
+        <!-- תוכן מרכזי -->
+        <main class="px-6 -mt-10 relative z-20">
+            
+            <!-- תור קרוב + זמינות בזמן אמת -->
+            <div class="space-y-3 mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s;">
+                <div class="bg-gradient-to-r from-pink-950/40 to-purple-950/40 border border-pink-500/20 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md">
+                    <div>
+                        <span class="text-xs text-pink-300 font-bold uppercase tracking-wider">התור הקרוב שלך</span>
+                        <h4 class="font-bold text-white text-sm">מניקור ולק ג'ל</h4>
+                    </div>
+                    <div class="text-left tabular-nums">
+                        <span class="text-sm font-bold text-white block">מחר, 10:00</span>
+                        <span class="text-xs text-gray-400">בעוד 22 שעות</span>
+                    </div>
+                </div>
+
+                <div class="inline-flex items-center gap-3 bg-red-950/40 border border-red-500/30 rounded-full px-4 py-2 backdrop-blur-md w-full">
+                    <span class="relative flex h-2.5 w-2.5">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                    </span>
+                    <span class="text-sm font-semibold text-red-100 tracking-wide tabular-nums">עדכון חי: נותר תור 1 בלבד להיום!</span>
+                </div>
+            </div>
+
+            <!-- כותרת גלריה -->
+            <div class="flex justify-between items-end mb-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.6s;">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold">השירותים שלנו</h2>
+                    <p class="text-xs text-gray-400">החליקי לצפייה במגוון הטיפולים</p>
+                </div>
+            </div>
+
+            <!-- קרוסלת כרטיסיות אינטראקטיבית -->
+            <div id="servicesCarousel" class="flex gap-2 overflow-x-auto no-scrollbar py-6 -mx-6 px-[20%] snap-x snap-mandatory opacity-0 animate-fade-in-up" style="animation-delay: 0.7s;">
+                
+                <div onclick="openBottomSheet('איפור ערב מקצועי', '₪350', '60 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">💄</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">איפור ערב</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪350 • 60 דק׳</p>
+                    </div>
+                </div>
+
+                <div onclick="openBottomSheet('מניקור ולק ג׳ל', '₪180', '45 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute top-4 right-4 bg-brand-rose/90 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                        <span class="text-xs text-white font-bold">🔥 מבוקש</span>
+                    </div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">💅</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">מניקור ולק ג'ל</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪180 • 45 דק׳</p>
+                    </div>
+                </div>
+
+                <div onclick="openBottomSheet('הרמת ריסים וגבות', '₪220', '50 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1583001931096-959e9a1a6223?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">👁️</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">הרמת ריסים</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪220 • 50 דק׳</p>
+                    </div>
+                </div>
+
+                <div onclick="openBottomSheet('טיפול פנים זוהר', '₪400', '75 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">✨</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">טיפול פנים Glow</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪400 • 75 דק׳</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- סרגל ניווט תחתון -->
+        <nav class="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto glass-nav pb-[var(--sab)] px-6 py-3">
+            <div class="flex justify-between items-center">
+                <button class="flex flex-col items-center gap-1 text-brand-rose">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                    <span class="text-[10px] font-bold">ראשי</span>
+                </button>
+                <button onclick="openBottomSheet('קביעת תור מהירה', '', '')" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span class="text-[10px] font-bold">תורים</span>
+                </button>
+                <a href="https://waze.com" target="_blank" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    <span class="text-[10px] font-bold">ניווט</span>
+                </a>
+                <a href="https://wa.me/" target="_blank" class="flex flex-col items-center gap-1 text-gray-400 hover:text-white">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                    <span class="text-[10px] font-bold">וואטסאפ</span>
+                </a>
+            </div>
+        </nav>
+
+        <!-- Bottom Sheet Modal -->
+        <div id="bottomSheetModal" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0 bg-black/60 backdrop-blur-sm">
+            <div id="sheetCard" class="bottom-sheet pointer-events-auto absolute bottom-0 left-0 right-0 max-w-md mx-auto bg-[#121212] border-t border-white/10 rounded-t-[2.5rem] p-6 transform translate-y-full pb-[calc(20px+var(--sab))]">
+                <div id="dragHandle" class="w-12 h-1.5 bg-gray-600/60 rounded-full mx-auto mb-6 cursor-grab active:cursor-grabbing"></div>
+
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h3 id="sheetTitle" class="text-2xl font-serif font-bold text-white">קביעת תור</h3>
+                        <p id="sheetSubtitle" class="text-sm text-gray-400 tabular-nums">בחרי את השעה והתאריך המבוקש</p>
+                    </div>
+                    <span id="sheetPrice" class="text-xl font-bold text-brand-rose tabular-nums"></span>
+                </div>
+
+                <form onsubmit="completeBooking(event)" class="space-y-4">
+                    <div>
+                        <label class="text-xs text-gray-400 mb-1 block">תאריך מבוקש</label>
+                        <input type="date" required class="w-full bg-white/5 border border-white/10 rounded-2xl p-4 text-white focus:outline-none focus:border-brand-rose tabular-nums">
+                    </div>
+                    
+                    <div>
+                        <label class="text-xs text-gray-400 mb-1 block">שעות זמינות להיום</label>
+                        <div class="grid grid-cols-3 gap-2 tabular-nums">
+                            <button type="button" onclick="selectTime(this)" class="time-btn bg-white/5 border border-white/10 rounded-xl py-3 text-sm font-semibold hover:bg-brand-rose/20 active:scale-95 transition-all">14:00</button>
+                            <button type="button" onclick="selectTime(this)" class="time-btn bg-white/5 border border-white/10 rounded-xl py-3 text-sm font-semibold hover:bg-brand-rose/20 active:scale-95 transition-all">16:30</button>
+                            <button type="button" onclick="selectTime(this)" class="time-btn bg-white/5 border border-white/10 rounded-xl py-3 text-sm font-semibold hover:bg-brand-rose/20 active:scale-95 transition-all">18:00</button>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-gradient-to-r from-brand-rose to-pink-700 text-white rounded-2xl py-4 font-bold text-lg shadow-lg active:scale-95 transition-transform mt-4 flex items-center justify-center gap-2">
+                        <span>אישור והבטחת התור</span>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 🚀 מנגנון Parallax עוצמתי וסופר-חלק בזמן גלילה
+        const header = document.getElementById('headerNav');
+        const parallaxMedia = document.getElementById('parallaxMedia');
+        let ticking = false;
+
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrollY = window.scrollY;
+
+                    // הזזת התמונה בקצב של 45% ממהירות הגלילה + זום עדין בעת הגלילה
+                    if (parallaxMedia && scrollY < window.innerHeight) {
+                        const translateY = scrollY * 0.45;
+                        const scale = 1 + (scrollY * 0.0004); // זום עדין
+                        parallaxMedia.style.transform = `translate3d(0, ${translateY}px, 0) scale(${scale})`;
+                    }
+
+                    // הפיכת הכותרת העליונה לגלולה
+                    if (scrollY > 40) header.classList.add('scrolled');
+                    else header.classList.remove('scrolled');
+
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
+
+        // 🎯 קפיצת כרטיסיות אינטראקטיביות בקרוסלה
+        const carousel = document.getElementById('servicesCarousel');
+        const cards = carousel.querySelectorAll('.service-card');
+
+        function updateCardInteractiveScales() {
+            const carouselCenter = carousel.getBoundingClientRect().left + carousel.offsetWidth / 2;
+
+            cards.forEach(card => {
+                const cardBox = card.getBoundingClientRect();
+                const cardCenter = cardBox.left + cardBox.width / 2;
+                const distance = Math.abs(carouselCenter - cardCenter);
+
+                if (distance < 90) {
+                    card.style.transform = 'scale(1.08) translateY(-12px)';
+                    card.style.opacity = '1';
+                    card.style.borderColor = 'rgba(190, 24, 93, 0.6)';
+                    card.style.boxShadow = '0 20px 40px -10px rgba(190, 24, 93, 0.3)';
+                } else {
+                    card.style.transform = 'scale(0.88) translateY(0px)';
+                    card.style.opacity = '0.55';
+                    card.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    card.style.boxShadow = 'none';
+                }
+            });
+        }
+
+        carousel.addEventListener('scroll', updateCardInteractiveScales);
+        window.addEventListener('resize', updateCardInteractiveScales);
+        setTimeout(updateCardInteractiveScales, 150);
+
+        function triggerHaptic() {
+            if (navigator.vibrate) navigator.vibrate(12);
+        }
+
+        // Bottom Sheet Logic
+        const modal = document.getElementById('bottomSheetModal');
+        const card = document.getElementById('sheetCard');
+
+        function openBottomSheet(title, price, duration) {
+            triggerHaptic();
+            document.getElementById('sheetTitle').innerText = title;
+            document.getElementById('sheetPrice').innerText = price;
+            if(duration) document.getElementById('sheetSubtitle').innerText = `משך הטיפול: ${duration}`;
+
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            card.classList.remove('translate-y-full');
+        }
+
+        function closeBottomSheet() {
+            triggerHaptic();
+            card.classList.add('translate-y-full');
+            modal.classList.add('opacity-0');
+            setTimeout(() => modal.classList.add('pointer-events-none'), 300);
+        }
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeBottomSheet();
+        });
+
+        function selectTime(btn) {
+            triggerHaptic();
+            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('border-brand-rose', 'bg-brand-rose/30'));
+            btn.classList.add('border-brand-rose', 'bg-brand-rose/30');
+        }
+
+        function completeBooking(e) {
+            e.preventDefault();
+            triggerHaptic();
+
+            const btn = document.getElementById('submitBtn');
+            btn.innerHTML = `<span>שומר תור...</span>`;
+
+            setTimeout(() => {
+                confetti({
+                    particleCount: 80,
+                    spread: 60,
+                    origin: { y: 0.8 },
+                    colors: ['#be185d', '#fce7f3', '#ffffff']
+                });
+
+                btn.innerHTML = `<span>✓ התור שוריין בהצלחה!</span>`;
+                btn.classList.remove('from-brand-rose', 'to-pink-700');
+                btn.classList.add('bg-green-600');
+
+                setTimeout(() => {
+                    closeBottomSheet();
+                    setTimeout(() => {
+                        btn.innerHTML = `<span>אישור והבטחת התור</span>`;
+                        btn.classList.add('from-brand-rose', 'to-pink-700');
+                        btn.classList.remove('bg-green-600');
+                    }, 400);
+                }, 1500);
+
+            }, 600);
+        }
+    </script>
+</body>
+</html>
