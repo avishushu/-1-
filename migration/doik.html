@@ -9,7 +9,6 @@
     <!-- Tailwind CSS & Google Fonts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
-    <!-- Canvas Confetti Library for Micro-Delight -->
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <script>
@@ -31,7 +30,6 @@
                     animation: {
                         'blob': 'blob 10s infinite alternate',
                         'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'shimmer': 'shimmer 2s infinite linear',
                     },
                     keyframes: {
                         blob: {
@@ -41,10 +39,6 @@
                         fadeInUp: {
                             '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                        shimmer: {
-                            '0%': { transform: 'translateX(-100%)' },
-                            '100%': { transform: 'translateX(100%)' },
                         }
                     }
                 }
@@ -53,7 +47,6 @@
     </script>
 
     <style>
-        /* 1. נעילת התנהגות דפדפן ותמיכה ב-Notch */
         :root {
             --sat: env(safe-area-inset-top);
             --sab: env(safe-area-inset-bottom);
@@ -64,14 +57,13 @@
             color: #fdfbfb;
             user-select: none;
             -webkit-user-select: none;
-            overscroll-behavior-y: contain; /* ביטול Pull-to-refresh של הדפדפן */
+            overscroll-behavior-y: contain;
             -webkit-tap-highlight-color: transparent;
             overflow-x: hidden;
             padding-top: var(--sat);
-            padding-bottom: calc(80px + var(--sab)); /* רווח עבור סרגל הניווט התחתון */
+            padding-bottom: calc(80px + var(--sab));
         }
 
-        /* 2. ספרות יציבות לזמנים ומחירים */
         .tabular-nums {
             font-variant-numeric: tabular-nums;
         }
@@ -80,16 +72,15 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
         .hero-mask {
-            mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
         }
 
-        /* 3. כותרת דינמית (Smart Header) */
         .smart-header { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .smart-header-inner { transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .smart-header.scrolled { padding-top: calc(12px + var(--sat)); padding-left: 20px; padding-right: 20px; }
         .smart-header.scrolled .smart-header-inner {
-            background: rgba(20, 20, 20, 0.7);
+            background: rgba(20, 20, 20, 0.75);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.12);
@@ -98,17 +89,21 @@
             border-radius: 9999px;
         }
 
-        /* 4. Bottom Sheet נגרר */
         .bottom-sheet {
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        /* 5. Glassmorphism לסרגל ניווט תחתון */
         .glass-nav {
-            background: rgba(18, 18, 18, 0.75);
+            background: rgba(18, 18, 18, 0.8);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* סגנון לכרטיסיות שנגללות - מעבר חלק לקפיצה */
+        .service-card {
+            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease;
+            will-change: transform, opacity;
         }
     </style>
 </head>
@@ -122,7 +117,7 @@
 
     <div class="max-w-md mx-auto relative min-h-screen">
         
-        <!-- Smart Floating Header -->
+        <!-- Header -->
         <div id="headerNav" class="smart-header fixed top-0 w-full max-w-md z-40 p-6">
             <div class="smart-header-inner flex justify-between items-center">
                 <span class="font-serif italic font-bold text-xl tracking-wider">Hodaya.</span>
@@ -132,15 +127,13 @@
             </div>
         </div>
 
-        <!-- Cinematic Video Hero with Parallax -->
+        <!-- Hero Header עם תמונה יציבה במיזוג קולנועי -->
         <header class="relative h-[60vh] w-full hero-mask overflow-hidden">
             <div id="parallaxMedia" class="absolute inset-0 w-full h-[120%] -top-[10%]">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover opacity-80">
-                    <source src="https://cdn.coverr.co/videos/coverr-a-woman-applying-makeup-5264/1080p.mp4" type="video/mp4">
-                </video>
+                <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&q=80&w=1200" alt="Hodaya Beauty Studio" class="w-full h-full object-cover opacity-85">
             </div>
             
-            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark via-brand-dark/30 to-transparent"></div>
 
             <div class="absolute bottom-16 right-6 left-6 z-10">
                 <h1 class="font-serif text-5xl font-bold mb-3 opacity-0 animate-fade-in-up" style="animation-delay: 0.2s;">
@@ -156,9 +149,7 @@
         <main class="px-6 -mt-10 relative z-20">
             
             <!-- תור קרוב + זמינות בזמן אמת -->
-            <div class="space-y-3 mb-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s;">
-                
-                <!-- תור שמור (Personalized Badge) -->
+            <div class="space-y-3 mb-8 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s;">
                 <div class="bg-gradient-to-r from-pink-950/40 to-purple-950/40 border border-pink-500/20 rounded-2xl p-4 flex justify-between items-center backdrop-blur-md">
                     <div>
                         <span class="text-xs text-pink-300 font-bold uppercase tracking-wider">התור הקרוב שלך</span>
@@ -170,7 +161,6 @@
                     </div>
                 </div>
 
-                <!-- עדכון חי -->
                 <div class="inline-flex items-center gap-3 bg-red-950/40 border border-red-500/30 rounded-full px-4 py-2 backdrop-blur-md w-full">
                     <span class="relative flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
@@ -180,17 +170,20 @@
                 </div>
             </div>
 
-            <!-- שירותים -->
-            <div class="flex justify-between items-end mb-4 opacity-0 animate-fade-in-up" style="animation-delay: 0.6s;">
-                <h2 class="text-2xl font-serif font-bold">השירותים שלנו</h2>
+            <!-- כותרת גלריה -->
+            <div class="flex justify-between items-end mb-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.6s;">
+                <div>
+                    <h2 class="text-2xl font-serif font-bold">השירותים שלנו</h2>
+                    <p class="text-xs text-gray-400">החליקי לצפייה במגוון הטיפולים</p>
+                </div>
             </div>
 
-            <!-- קרוסלת כרטיסיות -->
-            <div class="flex gap-4 overflow-x-auto no-scrollbar pb-6 -mx-6 px-6 snap-x opacity-0 animate-fade-in-up" style="animation-delay: 0.7s;">
+            <!-- קרוסלת כרטיסיות אינטראקטיבית עם אפקט קפיצה במרכז -->
+            <div id="servicesCarousel" class="flex gap-2 overflow-x-auto no-scrollbar py-6 -mx-6 px-[20%] snap-x snap-mandatory opacity-0 animate-fade-in-up" style="animation-delay: 0.7s;">
                 
-                <!-- כרטיסייה 1 -->
-                <div onclick="openBottomSheet('איפור ערב', '₪350', '60 דק׳')" class="snap-center relative min-w-[220px] h-[280px] rounded-[2.5rem] overflow-hidden flex-shrink-0 group cursor-pointer border border-white/10 active:scale-95 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&q=80&w=500" class="absolute inset-0 w-full h-full object-cover">
+                <!-- שירות 1 -->
+                <div onclick="openBottomSheet('איפור ערב מקצועי', '₪350', '60 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1487412947147-5cebf100ffc2?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
                     <div class="absolute bottom-0 left-0 right-0 p-5">
                         <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
@@ -201,11 +194,11 @@
                     </div>
                 </div>
 
-                <!-- כרטיסייה 2 -->
-                <div onclick="openBottomSheet('מניקור ולק ג׳ל', '₪180', '45 דק׳')" class="snap-center relative min-w-[220px] h-[280px] rounded-[2.5rem] overflow-hidden flex-shrink-0 group cursor-pointer border border-white/10 active:scale-95 transition-transform">
-                    <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80&w=500" class="absolute inset-0 w-full h-full object-cover">
+                <!-- שירות 2 -->
+                <div onclick="openBottomSheet('מניקור ולק ג׳ל', '₪180', '45 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
                     <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
-                    <div class="absolute top-4 right-4 bg-brand-rose/80 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
+                    <div class="absolute top-4 right-4 bg-brand-rose/90 backdrop-blur-md px-3 py-1 rounded-full border border-white/20">
                         <span class="text-xs text-white font-bold">🔥 מבוקש</span>
                     </div>
                     <div class="absolute bottom-0 left-0 right-0 p-5">
@@ -217,11 +210,50 @@
                     </div>
                 </div>
 
+                <!-- שירות 3 -->
+                <div onclick="openBottomSheet('הרמת ריסים וגבות', '₪220', '50 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1583001931096-959e9a1a6223?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">👁️</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">הרמת ריסים</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪220 • 50 דק׳</p>
+                    </div>
+                </div>
+
+                <!-- שירות 4 -->
+                <div onclick="openBottomSheet('טיפול פנים זוהר', '₪400', '75 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">✨</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">טיפול פנים Glow</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪400 • 75 דק׳</p>
+                    </div>
+                </div>
+
+                <!-- שירות 5 -->
+                <div onclick="openBottomSheet('עיצוב תסרוקות ערב', '₪300', '60 דק׳')" class="service-card snap-center relative min-w-[220px] max-w-[220px] h-[300px] rounded-[2.5rem] overflow-hidden flex-shrink-0 cursor-pointer border border-white/10 bg-neutral-900">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?auto=format&fit=crop&q=80&w=600" class="absolute inset-0 w-full h-full object-cover">
+                    <div class="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent"></div>
+                    <div class="absolute bottom-0 left-0 right-0 p-5">
+                        <div class="bg-white/10 backdrop-blur-md w-10 h-10 rounded-2xl flex items-center justify-center mb-3 border border-white/10">
+                            <span class="text-xl">💇‍♀️</span>
+                        </div>
+                        <h3 class="font-bold text-lg mb-1">עיצוב שיער</h3>
+                        <p class="text-xs text-pink-200 font-bold tabular-nums">₪300 • 60 דק׳</p>
+                    </div>
+                </div>
+
             </div>
 
         </main>
 
-        <!-- 6. סרגל ניווט תחתון (Native Bottom Navigation Bar) -->
+        <!-- סרגל ניווט תחתון -->
         <nav class="fixed bottom-0 left-0 right-0 z-40 max-w-md mx-auto glass-nav pb-[var(--sab)] px-6 py-3">
             <div class="flex justify-between items-center">
                 <button class="flex flex-col items-center gap-1 text-brand-rose">
@@ -243,11 +275,9 @@
             </div>
         </nav>
 
-        <!-- 7. Swipeable Bottom Sheet (מגירת קביעת תור נגררת) -->
+        <!-- Bottom Sheet -->
         <div id="bottomSheetModal" class="fixed inset-0 z-50 pointer-events-none transition-opacity duration-300 opacity-0 bg-black/60 backdrop-blur-sm">
             <div id="sheetCard" class="bottom-sheet pointer-events-auto absolute bottom-0 left-0 right-0 max-w-md mx-auto bg-[#121212] border-t border-white/10 rounded-t-[2.5rem] p-6 transform translate-y-full pb-[calc(20px+var(--sab))]">
-                
-                <!-- Drag Handle (ידית גרירה להתנהגות נייטיב) -->
                 <div id="dragHandle" class="w-12 h-1.5 bg-gray-600/60 rounded-full mx-auto mb-6 cursor-grab active:cursor-grabbing"></div>
 
                 <div class="flex justify-between items-start mb-6">
@@ -258,7 +288,6 @@
                     <span id="sheetPrice" class="text-xl font-bold text-brand-rose tabular-nums"></span>
                 </div>
 
-                <!-- טופס מהיר -->
                 <form onsubmit="completeBooking(event)" class="space-y-4">
                     <div>
                         <label class="text-xs text-gray-400 mb-1 block">תאריך מבוקש</label>
@@ -278,7 +307,6 @@
                         <span>אישור והבטחת התור</span>
                     </button>
                 </form>
-
             </div>
         </div>
 
@@ -296,12 +324,44 @@
             else header.classList.remove('scrolled');
         });
 
+        // 🎯 מנגנון קפיצה אינטראקטיבי לכרטיסיות בגלילה
+        const carousel = document.getElementById('servicesCarousel');
+        const cards = carousel.querySelectorAll('.service-card');
+
+        function updateCardInteractiveScales() {
+            const carouselCenter = carousel.getBoundingClientRect().left + carousel.offsetWidth / 2;
+
+            cards.forEach(card => {
+                const cardBox = card.getBoundingClientRect();
+                const cardCenter = cardBox.left + cardBox.width / 2;
+                const distance = Math.abs(carouselCenter - cardCenter);
+
+                // אם הכרטיסיה קרובה למרכז המסך (עד 90 פיקסלים מהמרכז)
+                if (distance < 90) {
+                    card.style.transform = 'scale(1.08) translateY(-12px)';
+                    card.style.opacity = '1';
+                    card.style.borderColor = 'rgba(190, 24, 93, 0.6)';
+                    card.style.boxShadow = '0 20px 40px -10px rgba(190, 24, 93, 0.3)';
+                } else {
+                    card.style.transform = 'scale(0.88) translateY(0px)';
+                    card.style.opacity = '0.55';
+                    card.style.borderColor = 'rgba(255, 255, 255, 0.1)';
+                    card.style.boxShadow = 'none';
+                }
+            });
+        }
+
+        carousel.addEventListener('scroll', updateCardInteractiveScales);
+        window.addEventListener('resize', updateCardInteractiveScales);
+        // הפעלה ראשונית
+        setTimeout(updateCardInteractiveScales, 150);
+
         // Haptic Feedback Helper
         function triggerHaptic() {
             if (navigator.vibrate) navigator.vibrate(12);
         }
 
-        // Bottom Sheet Logic (Open / Close / Drag)
+        // Bottom Sheet Logic
         const modal = document.getElementById('bottomSheetModal');
         const card = document.getElementById('sheetCard');
 
@@ -326,14 +386,12 @@
             if (e.target === modal) closeBottomSheet();
         });
 
-        // Select Time Button
         function selectTime(btn) {
             triggerHaptic();
             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('border-brand-rose', 'bg-brand-rose/30'));
             btn.classList.add('border-brand-rose', 'bg-brand-rose/30');
         }
 
-        // 8. Micro-Delight Confetti & Booking Completion
         function completeBooking(e) {
             e.preventDefault();
             triggerHaptic();
@@ -342,7 +400,6 @@
             btn.innerHTML = `<span>שומר תור...</span>`;
 
             setTimeout(() => {
-                // פיזור חלקיקי חגיגה (Confetti)
                 confetti({
                     particleCount: 80,
                     spread: 60,
@@ -356,7 +413,6 @@
 
                 setTimeout(() => {
                     closeBottomSheet();
-                    // איפוס כפתור לאחר סגירה
                     setTimeout(() => {
                         btn.innerHTML = `<span>אישור והבטחת התור</span>`;
                         btn.classList.add('from-brand-rose', 'to-pink-700');
