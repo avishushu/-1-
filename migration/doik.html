@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Hodaya Beauty | איפור וציפורניים</title>
-    <meta name="theme-color" content="#FAF5F5">
+    <title>Hodaya Beauty | Premium Experience</title>
+    <meta name="theme-color" content="#FDFBFB">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -17,181 +17,227 @@
                 extend: {
                     colors: {
                         brand: {
-                            light: '#FAF5F5',
+                            light: '#FDFBFB',
                             pink: '#FCE7F3',
-                            rose: '#BE185D',
+                            rose: '#9D174D',
                             dark: '#1C1917',
                         }
                     },
                     fontFamily: {
                         sans: ['Assistant', 'sans-serif'],
                         serif: ['Playfair Display', 'serif'],
+                    },
+                    animation: {
+                        'blob': 'blob 10s infinite',
+                    },
+                    keyframes: {
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        }
                     }
                 }
             }
         }
     </script>
 
-    <!-- Eruda Mobile Console for Debugging -->
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
-
     <style>
         body { 
-            background-color: #FAF5F5; 
+            background-color: #FDFBFB; 
             color: #1C1917; 
             -webkit-tap-highlight-color: transparent; 
+            overflow-x: hidden;
         }
-        .glass { 
-            background: rgba(250, 245, 245, 0.85); 
-            backdrop-filter: blur(12px); 
-            border-bottom: 1px solid rgba(190, 24, 93, 0.05); 
+        
+        /* Advanced Glassmorphism */
+        .glass-panel { 
+            background: rgba(255, 255, 255, 0.6); 
+            backdrop-filter: blur(16px); 
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 8px 32px 0 rgba(157, 23, 77, 0.05);
         }
-        /* Hide scrollbar for horizontal scroll areas */
+        
+        .glass-header {
+            background: linear-gradient(180deg, rgba(253, 251, 251, 0.95) 0%, rgba(253, 251, 251, 0.7) 100%);
+            backdrop-filter: blur(12px);
+        }
+
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Animation Utility Classes */
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .scroll-reveal.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
-<body class="antialiased pb-28">
+<body class="antialiased pb-32 relative">
     
+    <!-- Animated Background Blobs -->
+    <div class="fixed inset-0 w-full h-full pointer-events-none z-[-1] overflow-hidden">
+        <div class="absolute top-0 right-0 w-72 h-72 bg-rose-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-40 left-10 w-72 h-72 bg-pink-300 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" style="animation-delay: 2s;"></div>
+        <div class="absolute -bottom-8 right-20 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob" style="animation-delay: 4s;"></div>
+    </div>
+
     <!-- Header -->
-    <header class="fixed w-full top-0 glass z-50">
-        <div class="max-w-md mx-auto px-6 py-4 flex justify-between items-center">
+    <header class="fixed w-full top-0 glass-header z-50 border-b border-white/50 transition-all duration-300" id="mainHeader">
+        <div class="max-w-md mx-auto px-6 py-4 flex justify-center items-center">
             <h1 class="text-3xl font-serif tracking-wide text-brand-dark">Hodaya <span class="text-brand-rose italic text-2xl">Beauty</span></h1>
         </div>
     </header>
 
-    <main class="pt-24 max-w-md mx-auto px-6 space-y-10">
+    <main class="pt-24 max-w-md mx-auto px-6 space-y-12 relative z-10">
         
         <!-- Hero Section -->
-        <div class="relative rounded-3xl overflow-hidden h-80 shadow-2xl">
-            <!-- Image placeholder (Makeup/Nails aesthetic) -->
-            <img src="https://images.unsplash.com/photo-1512496015851-a1c8dc833504?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="איפור מקצועי" class="w-full h-full object-cover">
-            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end p-6">
-                <p class="text-brand-pink text-xs font-semibold tracking-widest mb-2 uppercase">Makeup & Nails</p>
-                <h2 class="text-white text-4xl font-serif leading-tight shadow-sm">היופי שלך,<br>האמנות שלנו.</h2>
+        <div class="scroll-reveal relative rounded-[2rem] overflow-hidden h-[400px] shadow-2xl shadow-brand-rose/10 transform transition-transform hover:scale-[1.02] duration-500">
+            <img src="https://images.unsplash.com/photo-1512496015851-a1fb253860bb?auto=format&fit=crop&q=80&w=800" alt="Premium Makeup" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-brand-dark/90 via-brand-dark/20 to-transparent flex flex-col justify-end p-8">
+                <div class="w-10 h-1 bg-brand-rose mb-4 rounded-full"></div>
+                <h2 class="text-white text-5xl font-serif leading-tight shadow-sm mb-2">האמנות<br><span class="italic font-light text-brand-pink">שביופי שלך</span></h2>
             </div>
         </div>
 
         <!-- Categories / Services -->
-        <div>
-            <div class="flex justify-between items-end mb-4">
-                <h3 class="text-xl font-bold text-brand-dark">ההתמחויות שלנו</h3>
+        <div class="scroll-reveal" style="transition-delay: 100ms;">
+            <div class="flex justify-between items-end mb-6">
+                <h3 class="text-2xl font-serif font-bold text-brand-dark">ההתמחויות שלנו</h3>
             </div>
-            <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6">
+            <div class="flex gap-4 overflow-x-auto hide-scrollbar pb-6 -mx-6 px-6 snap-x">
                 
-                <div class="min-w-[140px] bg-white rounded-2xl p-5 shadow-sm border border-brand-pink/50 text-center flex-shrink-0">
-                    <div class="w-14 h-14 mx-auto bg-brand-pink/40 rounded-full flex items-center justify-center mb-3 text-2xl shadow-inner">💄</div>
-                    <h4 class="font-bold text-sm text-brand-dark">איפור ערב וכלה</h4>
+                <div class="snap-center min-w-[150px] glass-panel rounded-[1.5rem] p-6 text-center flex-shrink-0 transform transition active:scale-95">
+                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-pink to-rose-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner rotate-3 transition-transform hover:rotate-12 duration-300">💄</div>
+                    <h4 class="font-bold text-brand-dark">איפור ערב</h4>
                 </div>
                 
-                <div class="min-w-[140px] bg-white rounded-2xl p-5 shadow-sm border border-brand-pink/50 text-center flex-shrink-0">
-                    <div class="w-14 h-14 mx-auto bg-brand-pink/40 rounded-full flex items-center justify-center mb-3 text-2xl shadow-inner">💅</div>
-                    <h4 class="font-bold text-sm text-brand-dark">מניקור ולק ג'ל</h4>
+                <div class="snap-center min-w-[150px] glass-panel rounded-[1.5rem] p-6 text-center flex-shrink-0 transform transition active:scale-95">
+                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-pink to-rose-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner -rotate-3 transition-transform hover:-rotate-12 duration-300">💅</div>
+                    <h4 class="font-bold text-brand-dark">מניקור ולק ג'ל</h4>
                 </div>
                 
-                <div class="min-w-[140px] bg-white rounded-2xl p-5 shadow-sm border border-brand-pink/50 text-center flex-shrink-0">
-                    <div class="w-14 h-14 mx-auto bg-brand-pink/40 rounded-full flex items-center justify-center mb-3 text-2xl shadow-inner">✨</div>
-                    <h4 class="font-bold text-sm text-brand-dark">בניית ציפורניים</h4>
+                <div class="snap-center min-w-[150px] glass-panel rounded-[1.5rem] p-6 text-center flex-shrink-0 transform transition active:scale-95">
+                    <div class="w-16 h-16 mx-auto bg-gradient-to-br from-brand-pink to-rose-100 rounded-2xl flex items-center justify-center mb-4 text-3xl shadow-inner rotate-3 transition-transform hover:rotate-12 duration-300">✨</div>
+                    <h4 class="font-bold text-brand-dark">בניית ציפורניים</h4>
                 </div>
 
             </div>
         </div>
 
         <!-- Portfolio Snippet -->
-        <div>
-            <h3 class="text-xl font-bold text-brand-dark mb-4">הצצה לעבודות</h3>
-            <div class="grid grid-cols-2 gap-3">
-                <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="עבודת איפור" class="rounded-2xl h-44 w-full object-cover shadow-sm">
-                <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80" alt="עבודת ציפורניים" class="rounded-2xl h-44 w-full object-cover shadow-sm">
+        <div class="scroll-reveal" style="transition-delay: 200ms;">
+            <h3 class="text-2xl font-serif font-bold text-brand-dark mb-6">יצירות אחרונות</h3>
+            <div class="grid grid-cols-2 gap-4">
+                <div class="group relative rounded-[1.5rem] overflow-hidden h-56 shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1519014816548-bf5fe059e98b?auto=format&fit=crop&q=80&w=500" alt="Makeup Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500"></div>
+                </div>
+                <div class="group relative rounded-[1.5rem] overflow-hidden h-56 shadow-lg mt-6">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&q=80&w=500" alt="Nail Art" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors duration-500"></div>
+                </div>
             </div>
         </div>
 
     </main>
 
     <!-- Floating CTA Button -->
-    <div class="fixed bottom-6 left-0 right-0 px-6 z-40 max-w-md mx-auto pointer-events-none">
-        <button onclick="toggleModal('bookingModal')" class="pointer-events-auto w-full bg-brand-dark text-white rounded-2xl py-4 font-bold text-lg shadow-2xl hover:bg-black transition transform active:scale-95 flex justify-center items-center gap-3">
-            <span>קביעת תור בקליק</span>
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+    <div class="fixed bottom-8 left-0 right-0 px-6 z-40 max-w-md mx-auto pointer-events-none">
+        <button onclick="toggleModal('bookingModal')" class="pointer-events-auto w-full bg-brand-dark text-white rounded-[1.5rem] py-4 px-6 font-bold text-lg shadow-[0_10px_40px_rgba(28,25,23,0.3)] hover:bg-black transition-all duration-300 transform active:scale-95 flex justify-between items-center group">
+            <span class="tracking-wide">שרייני תור עכשיו</span>
+            <div class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center relative">
+                <div class="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-75"></div>
+                <svg class="w-5 h-5 text-brand-pink relative z-10 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+            </div>
         </button>
     </div>
 
-    <!-- Footer -->
-    <footer class="mt-8 pb-8 text-center text-sm text-gray-400 max-w-md mx-auto">
-        <p>© 2026 Hodaya Beauty.</p>
-        <p class="mt-1 text-xs">לתמיכה טכנית: AnfinityRoot@gmail.com</p>
-    </footer>
-
-    <!-- Booking Modal (Bottom Sheet) -->
-    <div id="bookingModal" class="fixed inset-0 bg-black/50 z-[100] hidden flex-col justify-end transition-opacity backdrop-blur-sm">
-        <div class="bg-white w-full max-w-md mx-auto rounded-t-3xl p-6 transform transition-transform relative max-h-[90vh] overflow-y-auto">
+    <!-- Booking Modal (Glassmorphism Sheet) -->
+    <div id="bookingModal" class="fixed inset-0 bg-brand-dark/40 z-[100] hidden flex-col justify-end transition-opacity backdrop-blur-md opacity-0 duration-300">
+        <div id="modalContent" class="glass-panel w-full max-w-md mx-auto rounded-t-[2.5rem] p-8 transform translate-y-full transition-transform duration-500 relative max-h-[90vh] overflow-y-auto">
             
-            <button onclick="toggleModal('bookingModal')" class="absolute top-5 left-6 text-gray-400 hover:text-gray-800 text-3xl leading-none">&times;</button>
+            <div class="w-12 h-1.5 bg-gray-300 rounded-full mx-auto mb-8 cursor-pointer" onclick="toggleModal('bookingModal')"></div>
             
-            <div class="text-center mb-6 mt-2">
-                <h3 class="text-2xl font-serif font-bold text-brand-dark">התור החדש שלך</h3>
-                <p class="text-sm text-gray-500 mt-1">נא למלא את הפרטים כדי לשריין מקום</p>
+            <div class="text-center mb-8">
+                <h3 class="text-3xl font-serif font-bold text-brand-dark">התור החדש שלך</h3>
+                <p class="text-sm text-gray-600 mt-2">נשמח לפנק אותך. בחרי שירות ומועד.</p>
             </div>
             
-            <form class="space-y-5" onsubmit="event.preventDefault(); alert('הבקשה נשלחה! ניצור קשר לאישור סופי.'); toggleModal('bookingModal');">
-                
-                <!-- Service Selection -->
+            <form class="space-y-5" onsubmit="event.preventDefault(); alert('הבקשה נשלחה!'); toggleModal('bookingModal');">
+                <!-- Inputs styled with minimal borders and glassy feel -->
                 <div>
-                    <label class="block text-sm font-bold text-brand-dark mb-2">סוג הטיפול</label>
-                    <select required class="w-full bg-brand-light border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-brand-rose focus:ring-1 focus:ring-brand-rose transition-all">
-                        <option value="">בחירת שירות...</option>
-                        <option value="makeup_evening">איפור ערב</option>
-                        <option value="makeup_bride">איפור כלה / ליווי כלה</option>
-                        <option value="nails_gel">מניקור ולק ג'ל</option>
-                        <option value="nails_build">בניית ציפורניים</option>
-                        <option value="nails_fill">מילוי ציפורניים</option>
+                    <select required class="w-full bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-2xl py-4 px-5 focus:outline-none focus:border-brand-rose focus:ring-2 focus:ring-brand-rose/20 transition-all font-medium text-gray-700">
+                        <option value="">באיזה טיפול תרצי לבחור?</option>
+                        <option value="makeup">איפור ערב / כלה</option>
+                        <option value="nails">מניקור ולק ג'ל / בנייה</option>
                     </select>
                 </div>
 
-                <!-- Name (Required) -->
                 <div>
-                    <label class="block text-sm font-bold text-brand-dark mb-2">שם מלא</label>
-                    <input type="text" required class="w-full bg-brand-light border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-brand-rose focus:ring-1 focus:ring-brand-rose transition-all" placeholder="השם שלך">
+                    <input type="text" required class="w-full bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-2xl py-4 px-5 focus:outline-none focus:border-brand-rose focus:ring-2 focus:ring-brand-rose/20 transition-all placeholder-gray-400" placeholder="השם המלא שלך">
                 </div>
                 
-                <!-- Phone (Optional) -->
-                <div>
-                    <label class="block text-sm font-bold text-brand-dark mb-2">טלפון <span class="text-gray-400 text-xs font-normal">(אופציונלי)</span></label>
-                    <input type="tel" class="w-full bg-brand-light border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-brand-rose focus:ring-1 focus:ring-brand-rose transition-all" placeholder="050-0000000">
-                </div>
-
-                <!-- Date & Time Picker -->
                 <div class="grid grid-cols-2 gap-4">
-                    <div>
-                        <label class="block text-sm font-bold text-brand-dark mb-2">תאריך</label>
-                        <input type="date" required class="w-full bg-brand-light border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-brand-rose focus:ring-1 focus:ring-brand-rose transition-all">
-                    </div>
-                    <div>
-                        <label class="block text-sm font-bold text-brand-dark mb-2">שעה</label>
-                        <input type="time" required class="w-full bg-brand-light border border-gray-200 rounded-xl py-3 px-4 focus:outline-none focus:border-brand-rose focus:ring-1 focus:ring-brand-rose transition-all">
-                    </div>
+                    <input type="date" required class="w-full bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-2xl py-4 px-5 focus:outline-none focus:border-brand-rose focus:ring-2 focus:ring-brand-rose/20 transition-all text-gray-600">
+                    <input type="time" required class="w-full bg-white/50 backdrop-blur-sm border border-gray-200/50 rounded-2xl py-4 px-5 focus:outline-none focus:border-brand-rose focus:ring-2 focus:ring-brand-rose/20 transition-all text-gray-600">
                 </div>
 
-                <button type="submit" class="w-full bg-brand-rose text-white rounded-xl py-4 mt-8 font-bold text-lg shadow-lg hover:bg-pink-700 transition">
+                <button type="submit" class="w-full bg-gradient-to-r from-brand-dark to-gray-800 text-white rounded-2xl py-4 mt-6 font-bold text-lg shadow-lg transform active:scale-95 transition-all">
                     אישור וסיום
                 </button>
             </form>
         </div>
     </div>
 
-    <!-- Modal Toggle Script -->
     <script>
+        // Intersection Observer for Scroll Animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.15 };
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Animate only once
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.scroll-reveal').forEach(el => observer.observe(el));
+        });
+
+        // Advanced Modal Toggle with Animation Logic
         function toggleModal(modalID) {
             const modal = document.getElementById(modalID);
+            const content = document.getElementById('modalContent');
+            
             if (modal.classList.contains('hidden')) {
                 modal.classList.remove('hidden');
                 modal.classList.add('flex');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
+                
+                // Trigger animations
+                setTimeout(() => {
+                    modal.classList.remove('opacity-0');
+                    content.classList.remove('translate-y-full');
+                }, 10);
             } else {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
+                // Reverse animations before hiding
+                modal.classList.add('opacity-0');
+                content.classList.add('translate-y-full');
                 document.body.style.overflow = 'auto';
+                
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    modal.classList.remove('flex');
+                }, 300); // Matches transition duration
             }
         }
     </script>
